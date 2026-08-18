@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BioEthix & MedLaw</title>
+<link rel="stylesheet" href="style.css" />
+<!-- Google Font & Font Awesome Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body class="dark-theme">
+
+<!-- Header / Navigation -->
+<header class="navbar">
+<div class="nav-brand">
+<i class="fa-solid fa-scale-balanced brand-icon"></i>
+<div class="brand-text">
+<span class="brand-title">BioEthix & MedLaw</span>
+<span class="brand-subtitle">Exploring Ethics. Advancing Justice.</span>
+</div>
+</div>
+<nav class="nav-links">
+<a href="#home" class="active">Home</a>
+<a href="#cases">Cases</a>
+<a href="#analyzer">Analyzer</a>
+<a href="#vote">Vote</a>
+<a href="#about">About</a>
+<a href="#disclaimer">Disclaimer</a>
+</nav>
+<div class="nav-actions">
+<button class="btn-secondary" id="theme-toggle"><i class="fa-solid fa-moon"></i></button>
+</div>
+</header>
+
+<main class="container">
+
+<!-- Hero Section -->
+<section class="hero-section" id="home">
+<div class="hero-content">
+<h1 class="hero-title">
+Explore, Question.<br>
+<span class="accent-text">Think Ethically.</span>
+</h1>
+<p class="hero-subtitle">
+Real-world dilemmas at the intersection of bioethics, medical science, technology, and law.
+</p>
+<div class="hero-buttons">
+<a href="#cases" class="btn btn-primary"><i class="fa-solid fa-book-open"></i> Browse Cases</a>
+<a href="#analyzer" class="btn btn-outline"><i class="fa-solid fa-chart-line"></i> Try the Analyzer</a>
+</div>
+</div>
+<div class="hero-graphic">
+<div class="graphic-card">
+<i class="fa-solid fa-dna dna-icon"></i>
+<i class="fa-solid fa-scale-balanced scale-icon"></i>
+</div>
+</div>
+</section>
+
+<!-- Explore Real-World Cases Section -->
+<section class="section" id="cases">
+<div class="section-header">
+<h2><i class="fa-solid fa-book-bookmark"></i> Explore Real-World Cases</h2>
+<div class="search-box">
+<i class="fa-solid fa-magnifying-glass search-icon"></i>
+<input type="text" id="case-search" placeholder="Search cases..." />
+</div>
+</div>
+
+<!-- Filter Badges -->
+<div class="filter-bar">
+<button class="filter-btn active" data-filter="all">All</button>
+<button class="filter-btn" data-filter="robotics">Robotics</button>
+<button class="filter-btn" data-filter="pediatrics">Pediatrics</button>
+<button class="filter-btn" data-filter="privacy">Data Privacy</button>
+<button class="filter-btn" data-filter="genetics">Genetics</button>
+<button class="filter-btn" data-filter="endoflife">End of Life</button>
+</div>
+
+<!-- Case Cards Grid -->
+<div class="cards-grid" id="cases-grid">
+<!-- Card 1 -->
+<div class="case-card" data-category="robotics">
+<div class="card-badge robotics-badge"><i class="fa-solid fa-robot"></i> Robotics</div>
+<h3>Autonomous Surgical Robotics in Dental Practice</h3>
+<p>Evaluating liability and patient consent when robotic systems perform invasive procedures.</p>
+<a href="#" class="card-link">Read case <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+
+<!-- Card 2 -->
+<div class="case-card" data-category="pediatrics">
+<div class="card-badge pediatrics-badge"><i class="fa-solid fa-child"></i> Pediatrics</div>
+<h3>Pediatric Blood Transfusion Refusal</h3>
+<p>Evaluating parental proxy rights versus pediatric assent when lifesaving care is declined.</p>
+<a href="#" class="card-link">Read case <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+
+<!-- Card 3 -->
+<div class="case-card" data-category="privacy">
+<div class="card-badge privacy-badge"><i class="fa-solid fa-shield-halved"></i> Data Privacy</div>
+<h3>AI Diagnostics & Patient Data Sovereignty</h3>
+<p>Analyzing privacy rights and consent requirements when training diagnostic ML models.</p>
+<a href="#" class="card-link">Read case <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+</div>
+
+<div class="center-btn-wrapper">
+<button class="btn btn-secondary"><i class="fa-solid fa-bars-staggered"></i> View all cases</button>
+</div>
+</section>
+
+<!-- Bottom Three Feature Cards -->
+<div class="features-grid">
+
+<!-- Community Vote Widget -->
+<div class="feature-card" id="vote">
+<h3><i class="fa-solid fa-chart-column"></i> Community Vote</h3>
+<p class="feature-sub">Share your perspective on this month's ethical dilemma.</p>
+<p class="dilemma-question"><strong>Is AI should be used to make medical decisions?</strong></p>
+
+<div class="vote-actions">
+<button class="btn btn-vote-yes" id="btn-agree"><i class="fa-solid fa-thumbs-up"></i> I agree</button>
+<button class="btn btn-vote-no" id="btn-disagree"><i class="fa-solid fa-thumbs-down"></i> I disagree</button>
+</div>
+
+<div class="progress-container">
+<div class="progress-labels">
+<span id="pct-agree">68%</span>
+<span id="pct-disagree">32%</span>
+</div>
+<div class="progress-bar-bg">
+<div class="progress-bar-fill" id="vote-fill" style="width: 68%;"></div>
+</div>
+<p class="vote-count" id="total-count">Based on 124 votes</p>
+</div>
+</div>
+
+<!-- Feedback Card -->
+<div class="feature-card" id="about">
+<h3><i class="fa-solid fa-comments"></i> Help Improve BioEthix & MedLaw</h3>
+<p class="feature-sub">Your feedback helps shape this project and make it more useful for students like you.</p>
+<ul class="feedback-list">
+<li><i class="fa-solid fa-check text-accent"></i> What did you find most interesting?</li>
+<li><i class="fa-solid fa-check text-accent"></i> Was anything confusing or difficult to use?</li>
+<li><i class="fa-solid fa-check text-accent"></i> Which topic or case should we explore next?</li>
+<li><i class="fa-solid fa-check text-accent"></i> What would make the website more useful for students?</li>
+</ul>
+<button class="btn btn-primary btn-full"><i class="fa-solid fa-pen-to-square"></i> Share your feedback</button>
+</div>
+
+<!-- Educational Disclaimer Card -->
+<div class="feature-card" id="disclaimer">
+<h3><i class="fa-solid fa-scale-unbalanced-flip"></i> Educational Disclaimer</h3>
+<p class="feature-sub">This website is for educational purposes only and does not constitute medical or legal advice.</p>
+<ul class="disclaimer-list">
+<li><i class="fa-solid fa-ban text-red"></i> Not a substitute for professional advice</li>
+<li><i class="fa-solid fa-globe text-blue"></i> Laws and practices vary by country</li>
+<li><i class="fa-solid fa-robot text-purple"></i> AI-generated content may be incomplete</li>
+</ul>
+<a href="#" class="disclaimer-link">Read full disclaimer <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+
+</div>
+
+<!-- Custom Case Analyzer Section -->
+<section class="section analyzer-section" id="analyzer">
+<h2><i class="fa-solid fa-pen-ruler"></i> Analyze a Custom Case</h2>
+<p class="section-sub">Describe a medical law or ethics conflict to get an objective, multi-perspective analysis.</p>
+
+<div class="analyzer-box">
+<textarea id="case-input" rows="4" placeholder="Describe the case summary and key dilemma..."></textarea>
+<button class="btn btn-primary" id="analyze-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Case</button>
+</div>
+<div id="analyzer-result" class="analyzer-result hidden"></div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+<div class="footer-container">
+<div class="footer-brand">
+<div class="nav-brand">
+<i class="fa-solid fa-scale-balanced brand-icon"></i>
+<span class="brand-title">BioEthix & MedLaw</span>
+</div>
+<p>Exploring the ethical crossroads of medicine, technology, and law.</p>
+<p class="copyright">&copy; 2026 BioEthix & MedLaw. All rights reserved.</p>
+</div>
+<div class="footer-links">
+<h4>Quick Links</h4>
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#cases">Cases</a></li>
+<li><a href="#analyzer">Analyzer</a></li>
+<li><a href="#vote">Vote</a></li>
+<li><a href="#disclaimer">Disclaimer</a></li>
+</ul>
+</div>
+<div class="footer-social">
+<h4>Connect</h4>
+<p>Get in touch or follow the project:</p>
+<div class="social-icons">
+<a href="#"><i class="fa-solid fa-envelope"></i></a>
+<a href="#"><i class="fa-brands fa-instagram"></i></a>
+<a href="#"><i class="fa-brands fa-github"></i></a>
+<a href="#"><i class="fa-brands fa-linkedin"></i></a>
+</div>
+</div>
+</div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
+
+
