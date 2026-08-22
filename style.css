@@ -550,3 +550,34 @@ grid-template-columns: 1fr;
 }
 }
 
+/* About / My Role Grid */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.role-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.role-icon {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.role-card h3 {
+  color: #38bdf8;
+  margin-bottom: 8px;
+  font-size: 1.15rem;
+}
+
+.role-card p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
