@@ -24,15 +24,6 @@ BioEthix structures healthcare ethics analysis through three foundational pillar
 
 ---
 
-## Architecture
-
-This app is built with vanilla **JavaScript** (31.8%), **HTML** (34%), and **CSS** (34.2%) for maximum portability and minimal dependencies.
-
-### Key Modules
-
-- **briefGenerator.js** — Core ethical framework engine
-- **jurisdictionRules.json** — Configurable legal/ethical rulesets
-- **submissionForm.html** — Community contribution interface
 
 ---
 
