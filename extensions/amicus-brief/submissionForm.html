@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Submit Case Study — Bioethix (Extensions)</title>
+<style>
+  body{font-family:Arial,Helvetica,sans-serif;max-width:720px;margin:2rem auto;padding:1rem}
+  label{display:block;margin-top:0.75rem}
+  textarea{width:100%; min-height:120px}
+  .warning{background:#fff3cd;border:1px solid #ffeeba;padding:0.6rem;margin-bottom:1rem}
+</style>
+</head>
+<body>
+  <h1>Submit Case Study (prefill GitHub Issue)</h1>
+  <div class="warning"><strong>Important:</strong> Do not include unredacted personal health identifiers (PHI). By submitting you confirm the case is anonymized. This is <em>not legal advice</em>.</div>
+  <form id="submitForm">
+    <label>Title<input name="title" required placeholder="Short descriptive title" /></label>
+    <label>Summary<textarea name="summary" required placeholder="One-paragraph summary (anonymize PHI)"></textarea></label>
+    <label>Facts (each line is one fact)<textarea name="facts" placeholder="Fact 1\nFact 2\n..."></textarea></label>
+    <label>Jurisdiction
+      <select name="jurisdiction">
+        <option value="US">United States</option>
+        <option value="EU">European Union</option>
+        <option value="UAE">United Arab Emirates</option>
+      </select>
+    </label>
+    <label>Your name (optional)<input name="author" /></label>
+    <button type="submit">Open Prefilled GitHub Issue</button>
+  </form>
+
+<script>
+const repoOwner = 'moonayasab-droid';
+const repoName = 'bioethix-app-main--4-';
+
+document.getElementById('submitForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const form = new FormData(e.target);
+  const title = encodeURIComponent(form.get('title'));
+  const jurisdiction = form.get('jurisdiction');
+  const factsRaw = form.get('facts') || '';
+  const bodyText = [
+    `**Jurisdiction:** ${jurisdiction}`,
+    `**Summary:**`,
+    form.get('summary'),
+    `**Facts:**`,
+    factsRaw.split('\n').filter(Boolean).map((f,i)=>`${i+1}. ${f}`).join('\n'),
+    `**Submitted by:** ${form.get('author') || 'Anonymous (or classroom)'}`,
+    `\n**Checklist for maintainers:**\n- Has PHI been redacted? (yes/no)\n- Recommended label: submission:peer-review\n\nPlease do not publish without redaction and review.`
+  ].join('\n\n');
+  const body = encodeURIComponent(bodyText);
+  const url = `https://github.com/${repoOwner}/${repoName}/issues/new?title=${title}&body=${body}&labels=submission:peer-review`;
+  window.open(url, '_blank');
+});
+</script>
+</body>
+</html>

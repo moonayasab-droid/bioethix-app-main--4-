@@ -1,0 +1,53 @@
+{
+  "US": {
+    "name": "United States (general)",
+    "legal_principles": {
+      "informed consent": {"desc":"Informed consent doctrine; patient must be informed of risks and alternatives","weight":0.7},
+      "data privacy": {"desc":"HIPAA & state privacy laws for health data; consent & permitted disclosures","weight":0.6},
+      "medical negligence / malpractice": {"desc":"Duty, breach, causation, damages; standard of care varies by jurisdiction","weight":0.65},
+      "patient autonomy / refusal of treatment": {"desc":"Right to refuse treatment; exceptions for incapacity or emergencies","weight":0.7}
+    },
+    "common_claims": {
+      "informed consent":"failure to disclose material risks",
+      "data privacy":"unauthorized disclosure or improper handling of PHI",
+      "medical negligence / malpractice":"deviation from standard of care",
+      "patient autonomy / refusal of treatment":"failure to respect valid refusal or inadequate capacity assessment"
+    },
+    "citation_templates": {
+      "informed consent":["See: Canterbury v. Spence (jurisdictional variations apply)"],
+      "data_privacy":["HIPAA Privacy Rule - 45 CFR Part 160,164"],
+      "medical negligence / malpractice":["State malpractice statutes and leading tort decisions"]
+    }
+  },
+  "EU": {
+    "name": "European Union (GDPR + patient rights)",
+    "legal_principles": {
+      "data privacy": {"desc":"GDPR: lawful basis, consent, data minimization, processing of health data as special category", "weight":0.8},
+      "informed consent": {"desc":"Patient rights under national health laws and EU directives","weight":0.65},
+      "medical negligence / malpractice": {"desc":"Civil liability frameworks vary by Member State","weight":0.6}
+    },
+    "common_claims": {
+      "data privacy":"processing special category data without appropriate legal basis or safeguards",
+      "informed consent":"insufficient information or coercion vitiating consent"
+    },
+    "citation_templates": {
+      "data_privacy":["GDPR Articles 6, 9: lawful bases & special categories"],
+      "informed_consent":["National healthcare statutes; Oviedo Convention principles may apply"]
+    }
+  },
+  "UAE": {
+    "name": "United Arab Emirates",
+    "legal_principles": {
+      "medical negligence / malpractice": {"desc":"Civil liability under UAE Medical Liability Law and professional regulations", "weight":0.6},
+      "informed consent": {"desc":"Consent requirements per local statutes and health authorities", "weight":0.6},
+      "data privacy": {"desc":"UAE federal/provincial data protection rules (as applicable)", "weight":0.5}
+    },
+    "common_claims": {
+      "medical negligence / malpractice":"breach of professional duty under national regulation",
+      "informed_consent":"absence of documented consent per facility policy"
+    },
+    "citation_templates": {
+      "medical_negligence":["UAE Medical Liability Law provisions and health authority regulations"]
+    }
+  }
+}
