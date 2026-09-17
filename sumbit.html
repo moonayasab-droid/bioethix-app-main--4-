@@ -21,41 +21,28 @@
 </head>
 <body>
   <main>
+    <p><a href="index.html">← Back to dashboard</a></p>
     <h1>Submit Evidence</h1>
     <p>Submit comparable product evidence for the Gender Pricing Transparency Engine.</p>
 
     <!-- Replace YOUR_FORM_ID with the ID from your Formspree dashboard. -->
-    <form id="evidence-form"
-          action="https://formspree.io/f/YOUR_FORM_ID"
-          method="POST"
-          novalidate>
-      <label>
-        Product/category
+    <form id="evidence-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+      <label>Product/category
         <input name="product" type="text" required maxlength="200" autocomplete="off">
       </label>
-
-      <label>
-        Product A price
+      <label>Product A price
         <input name="priceA" type="number" required min="0" step="0.01">
       </label>
-
-      <label>
-        Product B price
+      <label>Product B price
         <input name="priceB" type="number" required min="0" step="0.01">
       </label>
-
-      <label>
-        Net quantity/unit
+      <label>Net quantity/unit
         <input name="quantity" type="text" required maxlength="100">
       </label>
-
-      <label>
-        Product A details
+      <label>Product A details
         <textarea name="detailsA" required maxlength="2000"></textarea>
       </label>
-
-      <label>
-        Product B details
+      <label>Product B details
         <textarea name="detailsB" required maxlength="2000"></textarea>
       </label>
 
@@ -67,11 +54,9 @@
         <label><input type="checkbox" name="equivalence" value="pack_size"> Same pack size/count</label>
       </fieldset>
 
-      <label class="hp" aria-hidden="true">
-        Website
+      <label class="hp" aria-hidden="true">Website
         <input name="_gotcha" type="text" tabindex="-1" autocomplete="off">
       </label>
-
       <input type="hidden" name="_subject" value="New evidence submission">
       <button id="submit-evidence" type="submit">Submit Evidence</button>
       <p id="submission-status" role="status" aria-live="polite"></p>
@@ -118,44 +103,48 @@
         });
       };
 
-      const collectEntry = (data) => ({
-        product: String(data.get('product') || '').trim(),
-        priceA: String(data.get('priceA') || '').trim(),
-        priceB: String(data.get('priceB') || '').trim(),
-        quantity: String(data.get('quantity') || '').trim(),
-        detailsA: String(data.get('detailsA') || '').trim(),
-        detailsB: String(data.get('detailsB') || '').trim(),
-        equivalence: data.getAll('equivalence'),
-        submittedAt: new Date().toISOString()
-      });
-
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
         status.textContent = '';
 
         const data = new FormData(form);
         if (data.get('_gotcha')) return;
-
-        const entry = collectEntry(data);
         if (!form.checkValidity()) {
           form.reportValidity();
           status.textContent = 'Please complete all required fields.';
           return;
         }
-        if (entry.equivalence.length < 2) {
+
+        const equivalence = data.getAll('equivalence');
+        if (equivalence.length < 2) {
           status.textContent = 'Select at least two objective equivalence checks.';
           return;
         }
 
-        // Save and render immediately, even if the remote service is unavailable.
+        const entry = {
+          product: String(data.get('product') || '').trim(),
+          priceA: String(data.get('priceA') || '').trim(),
+          priceB: String(data.get('priceB') || '').trim(),
+          quantity: String(data.get('quantity') || '').trim(),
+          detailsA: String(data.get('detailsA') || '').trim(),
+          detailsB: String(data.get('detailsB') || '').trim(),
+          equivalence,
+          submittedAt: new Date().toISOString()
+        };
+
         const entries = readLocalEntries();
         entries.push(entry);
         localStorage.setItem(storageKey, JSON.stringify(entries));
         renderLocalEntries();
 
+        if (form.action.includes('YOUR_FORM_ID')) {
+          status.textContent = 'Saved locally. Add your real Formspree endpoint to enable cloud submission.';
+          form.reset();
+          return;
+        }
+
         submitButton.disabled = true;
         submitButton.textContent = 'Submitting…';
-
         try {
           const response = await fetch(form.action, {
             method: 'POST',
@@ -163,7 +152,6 @@
             headers: { Accept: 'application/json' }
           });
           if (!response.ok) throw new Error(`Submission failed (${response.status})`);
-
           status.textContent = 'Thanks — your evidence was saved locally and submitted.';
           form.reset();
         } catch (error) {
