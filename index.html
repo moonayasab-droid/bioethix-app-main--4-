@@ -28,6 +28,7 @@
 <a href="#home" class="active">Home</a>
 <a href="#cases">Cases</a>
 <a href="#analyzer">Analyzer</a>
+<a href="#submit-evidence">Evidence</a>
 <a href="#vote">Vote</a>
 <a href="#about">About</a>
 <a href="#disclaimer">Disclaimer</a>
@@ -174,7 +175,6 @@ Real-world dilemmas at the intersection of bioethics, medical science, technolog
   </div>
 
   <!-- Educational Disclaimer Card -->
-<!-- Educational Disclaimer Card -->
 <div class="feature-card" id="disclaimer">
 <h3><i class="fa-solid fa-scale-unbalanced-flip"></i> Educational Disclaimer</h3>
 <p class="feature-sub">This website is for educational purposes only and does not constitute medical or legal advice.</p>
@@ -200,6 +200,97 @@ Real-world dilemmas at the intersection of bioethics, medical science, technolog
 <div id="analyzer-result" class="analyzer-result hidden"></div>
 </section>
 
+<!-- Crowdsourced Evidence Submission -->
+<section class="section evidence-section" id="submit-evidence">
+  <h2><i class="fa-solid fa-file-circle-check"></i> Submit Evidence</h2>
+  <p class="section-sub">Add a product comparison to help crowdsource price transparency evidence.</p>
+
+  <form id="evidence-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+    <div class="analyzer-box" style="display:block; padding:18px; border:1px solid var(--border-light, #e2e8f0); border-radius:12px; background:var(--panel, #0f172a);">
+      <label style="display:block; margin-bottom:12px; font-weight:600; color: var(--text-primary, #e2e8f0);">
+        Product / Category
+        <input type="text" name="product" required maxlength="200" placeholder="e.g. Women’s shampoo" style="width:100%; margin-top:8px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light, #e2e8f0); background: rgba(15,23,42,0.7); color: var(--text-primary, #e2e8f0);">
+      </label>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+        <label style="display:block; font-weight:600; color: var(--text-primary, #e2e8f0);">
+          Product A price
+          <input type="number" name="priceA" min="0" step="0.01" required placeholder="0.00" style="width:100%; margin-top:8px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light, #e2e8f0); background: rgba(15,23,42,0.7); color: var(--text-primary, #e2e8f0);">
+        </label>
+
+        <label style="display:block; font-weight:600; color: var(--text-primary, #e2e8f0);">
+          Product B price
+          <input type="number" name="priceB" min="0" step="0.01" required placeholder="0.00" style="width:100%; margin-top:8px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light, #e2e8f0); background: rgba(15,23,42,0.7); color: var(--text-primary, #e2e8f0);">
+        </label>
+      </div>
+
+      <label style="display:block; margin-top:16px; font-weight:600; color: var(--text-primary, #e2e8f0);">
+        Net quantity / unit
+        <input type="text" name="quantity" required maxlength="100" placeholder="e.g. 250 ml / 12 oz / 1 pack" style="width:100%; margin-top:8px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light, #e2e8f0); background: rgba(15,23,42,0.7); color: var(--text-primary, #e2e8f0);">
+      </label>
+
+      <label style="display:block; margin-top:16px; font-weight:600; color: var(--text-primary, #e2e8f0);">
+        Product A details
+        <textarea name="detailsA" rows="3" required maxlength="2000" placeholder="Describe the product, brand, and context..." style="width:100%; margin-top:8px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light, #e2e8f0); resize:vertical; background: rgba(15,23,42,0.7); color: var(--text-primary, #e2e8f0);"></textarea>
+      </label>
+
+      <label style="display:block; margin-top:16px; font-weight:600; color: var(--text-primary, #e2e8f0);">
+        Product B details
+        <textarea name="detailsB" rows="3" required maxlength="2000" placeholder="Describe the comparison product..." style="width:100%; margin-top:8px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light, #e2e8f0); resize:vertical; background: rgba(15,23,42,0.7); color: var(--text-primary, #e2e8f0);"></textarea>
+      </label>
+
+      <fieldset style="margin-top:18px; border:1px solid var(--border-light, #e2e8f0); border-radius:10px; padding:12px 14px; color: var(--text-primary, #e2e8f0);">
+        <legend style="padding:0 8px; font-weight:700;">Strict equivalence checks (select at least 2)</legend>
+
+        <label style="display:block; margin-top:8px; color: var(--text-primary, #e2e8f0);">
+          <input type="checkbox" name="equivalence" value="net_quantity_unit">
+          Same net quantity / unit
+        </label>
+
+        <label style="display:block; margin-top:8px; color: var(--text-primary, #e2e8f0);">
+          <input type="checkbox" name="equivalence" value="primary_ingredients_materials">
+          Same primary ingredients / materials
+        </label>
+
+        <label style="display:block; margin-top:8px; color: var(--text-primary, #e2e8f0);">
+          <input type="checkbox" name="equivalence" value="function_performance">
+          Same function / performance
+        </label>
+
+        <label style="display:block; margin-top:8px; color: var(--text-primary, #e2e8f0);">
+          <input type="checkbox" name="equivalence" value="pack_size">
+          Same pack size / count
+        </label>
+      </fieldset>
+
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0; pointer-events:none;">
+      <input type="hidden" name="_subject" value="Gender Pricing Evidence Submission">
+
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:18px; flex-wrap:wrap;">
+        <button type="submit" class="btn btn-primary" style="width:auto;">
+          <i class="fa-solid fa-paper-plane"></i> Submit Evidence
+        </button>
+        <p id="evidence-status" role="status" aria-live="polite" style="margin:0; color:var(--text-muted, #94a3b8);"></p>
+      </div>
+    </div>
+  </form>
+
+  <div style="margin-top:20px;">
+    <h3>Local evidence log</h3>
+    <table style="width:100%; border-collapse:collapse; margin-top:10px; color: var(--text-primary, #e2e8f0);">
+      <thead>
+        <tr>
+          <th style="padding:10px; border:1px solid var(--border-light, #e2e8f0); text-align:left;">Product</th>
+          <th style="padding:10px; border:1px solid var(--border-light, #e2e8f0); text-align:left;">Prices</th>
+          <th style="padding:10px; border:1px solid var(--border-light, #e2e8f0); text-align:left;">Quantity</th>
+          <th style="padding:10px; border:1px solid var(--border-light, #e2e8f0); text-align:left;">Checks</th>
+        </tr>
+      </thead>
+      <tbody id="evidence-table-body"></tbody>
+    </table>
+  </div>
+</section>
+
 </main>
 
 <!-- Footer -->
@@ -219,6 +310,7 @@ Real-world dilemmas at the intersection of bioethics, medical science, technolog
 <li><a href="#home">Home</a></li>
 <li><a href="#cases">Cases</a></li>
 <li><a href="#analyzer">Analyzer</a></li>
+<li><a href="#submit-evidence">Evidence</a></li>
 <li><a href="#vote">Vote</a></li>
 <li><a href="#disclaimer">Disclaimer</a></li>
 </ul>
@@ -239,5 +331,3 @@ Real-world dilemmas at the intersection of bioethics, medical science, technolog
 <script src="app.js"></script>
 </body>
 </html>
-
-
