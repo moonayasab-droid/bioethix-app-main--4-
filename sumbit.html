@@ -12,6 +12,7 @@
     fieldset label { font-weight: 400; margin-top: .5rem; }
     fieldset input { width: auto; margin-right: .4rem; }
     button { cursor: pointer; margin-top: 1.25rem; }
+    button:disabled { cursor: wait; opacity: .7; }
     #submission-status { min-height: 1.5rem; margin-top: 1rem; }
     table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
     th, td { border: 1px solid #ddd; padding: .5rem; text-align: left; }
@@ -23,7 +24,7 @@
     <h1>Submit Evidence</h1>
     <p>Submit comparable product evidence for the Gender Pricing Transparency Engine.</p>
 
-    <!-- Replace the action URL with your Formspree form endpoint. Do not put API secrets here. -->
+    <!-- Replace YOUR_FORM_ID with the ID from your Formspree dashboard. -->
     <form id="evidence-form"
           action="https://formspree.io/f/YOUR_FORM_ID"
           method="POST"
@@ -66,7 +67,6 @@
         <label><input type="checkbox" name="equivalence" value="pack_size"> Same pack size/count</label>
       </fieldset>
 
-      <!-- Honeypot: leave empty; bots that fill it are rejected locally. -->
       <label class="hp" aria-hidden="true">
         Website
         <input name="_gotcha" type="text" tabindex="-1" autocomplete="off">
@@ -109,7 +109,7 @@
         readLocalEntries().forEach((entry) => {
           const row = document.createElement('tr');
           [entry.product, `${entry.priceA} / ${entry.priceB}`, entry.quantity,
-            String(entry.equivalence.length)].forEach((value) => {
+            String(Array.isArray(entry.equivalence) ? entry.equivalence.length : 0)].forEach((value) => {
             const cell = document.createElement('td');
             cell.textContent = value;
             row.appendChild(cell);
@@ -118,47 +118,39 @@
         });
       };
 
-      const collectEntry = () => {
-        const data = new FormData(form);
-        return {
-          product: String(data.get('product') || '').trim(),
-          priceA: String(data.get('priceA') || '').trim(),
-          priceB: String(data.get('priceB') || '').trim(),
-          quantity: String(data.get('quantity') || '').trim(),
-          detailsA: String(data.get('detailsA') || '').trim(),
-          detailsB: String(data.get('detailsB') || '').trim(),
-          equivalence: data.getAll('equivalence'),
-          submittedAt: new Date().toISOString()
-        };
-      };
+      const collectEntry = (data) => ({
+        product: String(data.get('product') || '').trim(),
+        priceA: String(data.get('priceA') || '').trim(),
+        priceB: String(data.get('priceB') || '').trim(),
+        quantity: String(data.get('quantity') || '').trim(),
+        detailsA: String(data.get('detailsA') || '').trim(),
+        detailsB: String(data.get('detailsB') || '').trim(),
+        equivalence: data.getAll('equivalence'),
+        submittedAt: new Date().toISOString()
+      });
 
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
         status.textContent = '';
 
-        const entry = collectEntry();
-        const requiredValues = [entry.product, entry.priceA, entry.priceB,
-          entry.quantity, entry.detailsA, entry.detailsB];
+        const data = new FormData(form);
+        if (data.get('_gotcha')) return;
 
-        if (form.elements._gotcha.value) return;
-        if (requiredValues.some((value) => !value)) {
-          status.textContent = 'Please complete all required fields.';
+        const entry = collectEntry(data);
+        if (!form.checkValidity()) {
           form.reportValidity();
+          status.textContent = 'Please complete all required fields.';
           return;
         }
         if (entry.equivalence.length < 2) {
           status.textContent = 'Select at least two objective equivalence checks.';
           return;
         }
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
 
-        // Save immediately so the user keeps a local copy even if the network fails.
-        const localEntries = readLocalEntries();
-        localEntries.push(entry);
-        localStorage.setItem(storageKey, JSON.stringify(localEntries));
+        // Save and render immediately, even if the remote service is unavailable.
+        const entries = readLocalEntries();
+        entries.push(entry);
+        localStorage.setItem(storageKey, JSON.stringify(entries));
         renderLocalEntries();
 
         submitButton.disabled = true;
@@ -167,7 +159,7 @@
         try {
           const response = await fetch(form.action, {
             method: 'POST',
-            body: new FormData(form),
+            body: data,
             headers: { Accept: 'application/json' }
           });
           if (!response.ok) throw new Error(`Submission failed (${response.status})`);
@@ -175,7 +167,7 @@
           status.textContent = 'Thanks — your evidence was saved locally and submitted.';
           form.reset();
         } catch (error) {
-          console.error(error);
+          console.error('Cloud submission failed:', error);
           status.textContent = 'Saved locally, but the cloud submission failed. Please try again later.';
         } finally {
           submitButton.disabled = false;
