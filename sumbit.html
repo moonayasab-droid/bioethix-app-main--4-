@@ -1,1 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit Evidence | Gender Pricing Transparency Engine</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+    label { display: block; margin-top: 1rem; font-weight: 600; }
+    input, textarea, button { box-sizing: border-box; width: 100%; padding: .7rem; margin-top: .35rem; }
+    fieldset { margin-top: 1rem; }
+    fieldset label { font-weight: 400; margin-top: .5rem; }
+    fieldset input { width: auto; margin-right: .4rem; }
+    button { cursor: pointer; margin-top: 1.25rem; }
+    #submission-status { min-height: 1.5rem; margin-top: 1rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+    th, td { border: 1px solid #ddd; padding: .5rem; text-align: left; }
+    .hp { position: absolute; left: -10000px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Submit Evidence</h1>
+    <p>Submit comparable product evidence for the Gender Pricing Transparency Engine.</p>
 
+    <!-- Replace the action URL with your Formspree form endpoint. Do not put API secrets here. -->
+    <form id="evidence-form"
+          action="https://formspree.io/f/YOUR_FORM_ID"
+          method="POST"
+          novalidate>
+      <label>
+        Product/category
+        <input name="product" type="text" required maxlength="200" autocomplete="off">
+      </label>
+
+      <label>
+        Product A price
+        <input name="priceA" type="number" required min="0" step="0.01">
+      </label>
+
+      <label>
+        Product B price
+        <input name="priceB" type="number" required min="0" step="0.01">
+      </label>
+
+      <label>
+        Net quantity/unit
+        <input name="quantity" type="text" required maxlength="100">
+      </label>
+
+      <label>
+        Product A details
+        <textarea name="detailsA" required maxlength="2000"></textarea>
+      </label>
+
+      <label>
+        Product B details
+        <textarea name="detailsB" required maxlength="2000"></textarea>
+      </label>
+
+      <fieldset>
+        <legend>Strict equivalence (select at least two objective checks)</legend>
+        <label><input type="checkbox" name="equivalence" value="net_quantity_unit"> Same net quantity/unit</label>
+        <label><input type="checkbox" name="equivalence" value="primary_ingredients_materials"> Same primary ingredients/materials</label>
+        <label><input type="checkbox" name="equivalence" value="function_performance"> Same function/performance</label>
+        <label><input type="checkbox" name="equivalence" value="pack_size"> Same pack size/count</label>
+      </fieldset>
+
+      <!-- Honeypot: leave empty; bots that fill it are rejected locally. -->
+      <label class="hp" aria-hidden="true">
+        Website
+        <input name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+      </label>
+
+      <input type="hidden" name="_subject" value="New evidence submission">
+      <button id="submit-evidence" type="submit">Submit Evidence</button>
+      <p id="submission-status" role="status" aria-live="polite"></p>
+    </form>
+
+    <section aria-labelledby="local-submissions-heading">
+      <h2 id="local-submissions-heading">Your local submissions</h2>
+      <table>
+        <thead><tr><th>Product</th><th>Prices</th><th>Quantity</th><th>Checks</th></tr></thead>
+        <tbody id="local-submissions"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const form = document.getElementById('evidence-form');
+      const status = document.getElementById('submission-status');
+      const tableBody = document.getElementById('local-submissions');
+      const submitButton = document.getElementById('submit-evidence');
+      const storageKey = 'genderPricingEvidence';
+
+      const readLocalEntries = () => {
+        try {
+          const entries = JSON.parse(localStorage.getItem(storageKey) || '[]');
+          return Array.isArray(entries) ? entries : [];
+        } catch (error) {
+          console.error('Could not read local submissions:', error);
+          return [];
+        }
+      };
+
+      const renderLocalEntries = () => {
+        tableBody.replaceChildren();
+        readLocalEntries().forEach((entry) => {
+          const row = document.createElement('tr');
+          [entry.product, `${entry.priceA} / ${entry.priceB}`, entry.quantity,
+            String(entry.equivalence.length)].forEach((value) => {
+            const cell = document.createElement('td');
+            cell.textContent = value;
+            row.appendChild(cell);
+          });
+          tableBody.appendChild(row);
+        });
+      };
+
+      const collectEntry = () => {
+        const data = new FormData(form);
+        return {
+          product: String(data.get('product') || '').trim(),
+          priceA: String(data.get('priceA') || '').trim(),
+          priceB: String(data.get('priceB') || '').trim(),
+          quantity: String(data.get('quantity') || '').trim(),
+          detailsA: String(data.get('detailsA') || '').trim(),
+          detailsB: String(data.get('detailsB') || '').trim(),
+          equivalence: data.getAll('equivalence'),
+          submittedAt: new Date().toISOString()
+        };
+      };
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        status.textContent = '';
+
+        const entry = collectEntry();
+        const requiredValues = [entry.product, entry.priceA, entry.priceB,
+          entry.quantity, entry.detailsA, entry.detailsB];
+
+        if (form.elements._gotcha.value) return;
+        if (requiredValues.some((value) => !value)) {
+          status.textContent = 'Please complete all required fields.';
+          form.reportValidity();
+          return;
+        }
+        if (entry.equivalence.length < 2) {
+          status.textContent = 'Select at least two objective equivalence checks.';
+          return;
+        }
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        // Save immediately so the user keeps a local copy even if the network fails.
+        const localEntries = readLocalEntries();
+        localEntries.push(entry);
+        localStorage.setItem(storageKey, JSON.stringify(localEntries));
+        renderLocalEntries();
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting…';
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' }
+          });
+          if (!response.ok) throw new Error(`Submission failed (${response.status})`);
+
+          status.textContent = 'Thanks — your evidence was saved locally and submitted.';
+          form.reset();
+        } catch (error) {
+          console.error(error);
+          status.textContent = 'Saved locally, but the cloud submission failed. Please try again later.';
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Submit Evidence';
+        }
+      });
+
+      renderLocalEntries();
+    })();
+  </script>
+</body>
+</html>
