@@ -5,329 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>BioEthix & MedLaw</title>
 <link rel="stylesheet" href="style.css" />
-<!-- Google Font & Font Awesome Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <link rel="stylesheet" href="https://...">
-    <meta name="google-site-verification" content="Sf1WCMyshZf23y-5UUvp2_laBnOFvDgp8OPVeWVxydo" />
+<meta name="google-site-verification" content="Sf1WCMyshZf23y-5UUvp2_laBnOFvDgp8OPVeWVxydo" />
 </head>
 <body class="dark-theme">
-
-<!-- Header / Navigation -->
 <header class="navbar">
-<div class="nav-brand">
-<i class="fa-solid fa-scale-balanced brand-icon"></i>
-<div class="brand-text">
-<span class="brand-title">BioEthix & MedLaw</span>
-<span class="brand-subtitle">Exploring Ethics. Advancing Justice.</span>
-</div>
-</div>
-<nav class="nav-links">
-<a href="#home" class="active">Home</a>
-<a href="#cases">Cases</a>
-<a href="#analyzer">Analyzer</a>
-<a href="#submit-evidence">Evidence</a>
-<a href="#vote">Vote</a>
-<a href="#about">About</a>
-<a href="#disclaimer">Disclaimer</a>
-</nav>
-<div class="nav-actions">
-<button class="btn-secondary" id="theme-toggle"><i class="fa-solid fa-moon"></i></button>
-</div>
+<div class="nav-brand"><i class="fa-solid fa-scale-balanced brand-icon"></i><div class="brand-text"><span class="brand-title">BioEthix & MedLaw</span><span class="brand-subtitle">Exploring Ethics. Advancing Justice.</span></div></div>
+<nav class="nav-links"><a href="#home" class="active">Home</a><a href="#cases">Cases</a><a href="#analyzer">Analyzer</a><a href="#submit-evidence">Evidence</a><a href="#vote">Vote</a><a href="#about">About</a><a href="#disclaimer">Disclaimer</a></nav>
+<div class="nav-actions"><button class="btn-secondary" id="theme-toggle"><i class="fa-solid fa-moon"></i></button></div>
 </header>
-
 <main class="container">
+<section class="hero-section" id="home"><div class="hero-content"><h1 class="hero-title">Explore, Question.<br><span class="accent-text">Think Ethically.</span></h1><p class="hero-subtitle">Real-world dilemmas at the intersection of bioethics, medical science, technology, and law.</p><div class="hero-buttons"><a href="#cases" class="btn btn-primary"><i class="fa-solid fa-book-open"></i> Browse Cases</a><a href="#analyzer" class="btn btn-outline"><i class="fa-solid fa-chart-line"></i> Try the Analyzer</a></div></div><div class="hero-graphic"><div class="graphic-card"><i class="fa-solid fa-dna dna-icon"></i><i class="fa-solid fa-scale-balanced scale-icon"></i></div></div></section>
+<section class="section" id="cases"><div class="section-header"><h2><i class="fa-solid fa-book-bookmark"></i> Explore Real-World Cases</h2><div class="search-box"><i class="fa-solid fa-magnifying-glass search-icon"></i><input type="text" id="case-search" placeholder="Search cases..." /></div></div><div class="filter-bar"><button class="filter-btn active" data-filter="all">All</button><button class="filter-btn" data-filter="robotics">Robotics</button><button class="filter-btn" data-filter="pediatrics">Pediatrics</button><button class="filter-btn" data-filter="privacy">Data Privacy</button><button class="filter-btn" data-filter="genetics">Genetics</button><button class="filter-btn" data-filter="endoflife">End of Life</button></div><div class="cards-grid" id="cases-grid"><div class="case-card" data-category="robotics"><div class="card-badge robotics-badge"><i class="fa-solid fa-robot"></i> Robotics</div><h3>Autonomous Surgical Robotics in Dental Practice</h3><p>Evaluating liability and patient consent when robotic systems perform invasive procedures.</p><a href="#" class="card-link">Read case <i class="fa-solid fa-arrow-right"></i></a></div><div class="case-card" data-category="pediatrics"><div class="card-badge pediatrics-badge"><i class="fa-solid fa-child"></i> Pediatrics</div><h3>Pediatric Blood Transfusion Refusal</h3><p>Evaluating parental proxy rights versus pediatric assent when lifesaving care is declined.</p><a href="#" class="card-link">Read case <i class="fa-solid fa-arrow-right"></i></a></div><div class="case-card" data-category="privacy"><div class="card-badge privacy-badge"><i class="fa-solid fa-shield-halved"></i> Data Privacy</div><h3>AI Diagnostics & Patient Data Sovereignty</h3><p>Analyzing privacy rights and consent requirements when training diagnostic ML models.</p><a href="#" class="card-link">Read case <i class="fa-solid fa-arrow-right"></i></a></div></div><div class="center-btn-wrapper"><button class="btn btn-secondary"><i class="fa-solid fa-bars-staggered"></i> View all cases</button></div></section>
+<div class="features-grid"><div class="feature-card" id="vote"><h3><i class="fa-solid fa-chart-column"></i> Community Vote</h3><p class="feature-sub">Share your perspective on this month's ethical dilemma.</p><p class="dilemma-question"><strong>Is AI should be used to make medical decisions?</strong></p><div class="vote-actions"><button class="btn btn-vote-yes" id="btn-agree"><i class="fa-solid fa-thumbs-up"></i> I agree</button><button class="btn btn-vote-no" id="btn-disagree"><i class="fa-solid fa-thumbs-down"></i> I disagree</button></div><div class="progress-container"><div class="progress-labels"><span id="pct-agree">68%</span><span id="pct-disagree">32%</span></div><div class="progress-bar-bg"><div class="progress-bar-fill" id="vote-fill" style="width: 68%;"></div></div><p class="vote-count" id="total-count">Based on 124 votes</p></div></div><div class="feature-card" id="about"><h3><i class="fa-solid fa-comments"></i> Help Improve BioEthix & MedLaw</h3><p class="feature-sub">Your feedback helps shape this project and make it more useful for students like you.</p><ul class="feedback-list"><li><i class="fa-solid fa-check text-accent"></i> What did you find most interesting?</li><li><i class="fa-solid fa-check text-accent"></i> Was anything confusing or difficult to use?</li><li><i class="fa-solid fa-check text-accent"></i> Which topic or case should we explore next?</li><li><i class="fa-solid fa-check text-accent"></i> What would make the website more useful for students?</li></ul><button class="btn btn-primary btn-full"><i class="fa-solid fa-pen-to-square"></i> Share your feedback</button></div></div>
+<div class="feature-card" id="about"><div class="section-header"><h2>👤 About the Platform & Creator</h2></div><div class="role-grid"><div class="role-card"><div class="role-icon">💡</div><h3>Platform Vision</h3><p>BioEthix & MedLaw was created to provide accessible, open-access analysis on complex legal, technological, and medical ethics dilemmas.</p></div><div class="role-card"><div class="role-icon">👩‍💻</div><h3>My Role</h3><p>As the founder and developer, I designed, researched, and engineered this platform to bridge the gap between bioethical theory and interactive digital tools.</p></div></div></div>
+<div class="feature-card" id="disclaimer"><h3><i class="fa-solid fa-scale-unbalanced-flip"></i> Educational Disclaimer</h3><p class="feature-sub">This website is for educational purposes only and does not constitute medical or legal advice.</p><ul class="disclaimer-list"><li><i class="fa-solid fa-ban text-red"></i> Not a substitute for professional advice</li><li><i class="fa-solid fa-globe text-blue"></i> Laws and practices vary by country</li><li><i class="fa-solid fa-robot text-purple"></i> AI-generated content may be incomplete</li></ul><a href="#" class="disclaimer-link">Read full disclaimer <i class="fa-solid fa-arrow-right"></i></a></div>
+<section class="section analyzer-section" id="analyzer"><h2><i class="fa-solid fa-pen-ruler"></i> Analyze a Custom Case</h2><p class="section-sub">Describe a medical law or ethics conflict to get an objective, multi-perspective analysis.</p><div class="analyzer-box"><textarea id="case-input" rows="4" placeholder="Describe the case summary and key dilemma..."></textarea><button class="btn btn-primary" id="analyze-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Case</button></div><div id="analyzer-result" class="analyzer-result hidden"></div></section>
 
-<!-- Hero Section -->
-<section class="hero-section" id="home">
-<div class="hero-content">
-<h1 class="hero-title">
-Explore, Question.<br>
-<span class="accent-text">Think Ethically.</span>
-</h1>
-<p class="hero-subtitle">
-Real-world dilemmas at the intersection of bioethics, medical science, technology, and law.
-</p>
-<div class="hero-buttons">
-<a href="#cases" class="btn btn-primary"><i class="fa-solid fa-book-open"></i> Browse Cases</a>
-<a href="#analyzer" class="btn btn-outline"><i class="fa-solid fa-chart-line"></i> Try the Analyzer</a>
-</div>
-</div>
-<div class="hero-graphic">
-<div class="graphic-card">
-<i class="fa-solid fa-dna dna-icon"></i>
-<i class="fa-solid fa-scale-balanced scale-icon"></i>
-</div>
-</div>
-</section>
-
-<!-- Explore Real-World Cases Section -->
-<section class="section" id="cases">
-<div class="section-header">
-<h2><i class="fa-solid fa-book-bookmark"></i> Explore Real-World Cases</h2>
-<div class="search-box">
-<i class="fa-solid fa-magnifying-glass search-icon"></i>
-<input type="text" id="case-search" placeholder="Search cases..." />
-</div>
-</div>
-
-<!-- Filter Badges -->
-<div class="filter-bar">
-<button class="filter-btn active" data-filter="all">All</button>
-<button class="filter-btn" data-filter="robotics">Robotics</button>
-<button class="filter-btn" data-filter="pediatrics">Pediatrics</button>
-<button class="filter-btn" data-filter="privacy">Data Privacy</button>
-<button class="filter-btn" data-filter="genetics">Genetics</button>
-<button class="filter-btn" data-filter="endoflife">End of Life</button>
-</div>
-
-<!-- Case Cards Grid -->
-<div class="cards-grid" id="cases-grid">
-<!-- Card 1 -->
-<div class="case-card" data-category="robotics">
-<div class="card-badge robotics-badge"><i class="fa-solid fa-robot"></i> Robotics</div>
-<h3>Autonomous Surgical Robotics in Dental Practice</h3>
-<p>Evaluating liability and patient consent when robotic systems perform invasive procedures.</p>
-<a href="#" class="card-link">Read case <i class="fa-solid fa-arrow-right"></i></a>
-</div>
-
-<!-- Card 2 -->
-<div class="case-card" data-category="pediatrics">
-<div class="card-badge pediatrics-badge"><i class="fa-solid fa-child"></i> Pediatrics</div>
-<h3>Pediatric Blood Transfusion Refusal</h3>
-<p>Evaluating parental proxy rights versus pediatric assent when lifesaving care is declined.</p>
-<a href="#" class="card-link">Read case <i class="fa-solid fa-arrow-right"></i></a>
-</div>
-
-<!-- Card 3 -->
-<div class="case-card" data-category="privacy">
-<div class="card-badge privacy-badge"><i class="fa-solid fa-shield-halved"></i> Data Privacy</div>
-<h3>AI Diagnostics & Patient Data Sovereignty</h3>
-<p>Analyzing privacy rights and consent requirements when training diagnostic ML models.</p>
-<a href="#" class="card-link">Read case <i class="fa-solid fa-arrow-right"></i></a>
-</div>
-</div>
-
-<div class="center-btn-wrapper">
-<button class="btn btn-secondary"><i class="fa-solid fa-bars-staggered"></i> View all cases</button>
-</div>
-</section>
-
-<!-- Bottom Three Feature Cards -->
-<div class="features-grid">
-
-<!-- Community Vote Widget -->
-<div class="feature-card" id="vote">
-<h3><i class="fa-solid fa-chart-column"></i> Community Vote</h3>
-<p class="feature-sub">Share your perspective on this month's ethical dilemma.</p>
-<p class="dilemma-question"><strong>Is AI should be used to make medical decisions?</strong></p>
-
-<div class="vote-actions">
-<button class="btn btn-vote-yes" id="btn-agree"><i class="fa-solid fa-thumbs-up"></i> I agree</button>
-<button class="btn btn-vote-no" id="btn-disagree"><i class="fa-solid fa-thumbs-down"></i> I disagree</button>
-</div>
-
-<div class="progress-container">
-<div class="progress-labels">
-<span id="pct-agree">68%</span>
-<span id="pct-disagree">32%</span>
-</div>
-<div class="progress-bar-bg">
-<div class="progress-bar-fill" id="vote-fill" style="width: 68%;"></div>
-</div>
-<p class="vote-count" id="total-count">Based on 124 votes</p>
-</div>
-</div>
-
-<!-- Feedback Card -->
-<div class="feature-card" id="about">
-<h3><i class="fa-solid fa-comments"></i> Help Improve BioEthix & MedLaw</h3>
-<p class="feature-sub">Your feedback helps shape this project and make it more useful for students like you.</p>
-<ul class="feedback-list">
-<li><i class="fa-solid fa-check text-accent"></i> What did you find most interesting?</li>
-<li><i class="fa-solid fa-check text-accent"></i> Was anything confusing or difficult to use?</li>
-<li><i class="fa-solid fa-check text-accent"></i> Which topic or case should we explore next?</li>
-<li><i class="fa-solid fa-check text-accent"></i> What would make the website more useful for students?</li>
-</ul>
-<button class="btn btn-primary btn-full"><i class="fa-solid fa-pen-to-square"></i> Share your feedback</button>
-</div>
-</div>
-
-  <!-- My Role Section -->
-  <div class="feature-card" id="about">
-    <div class="section-header">
-      <h2>👤 About the Platform & Creator</h2>
-    </div>
-    <div class="role-grid">
-      <div class="role-card">
-        <div class="role-icon">💡</div>
-        <h3>Platform Vision</h3>
-        <p>BioEthix & MedLaw was created to provide accessible, open-access analysis on complex legal, technological, and medical ethics dilemmas.</p>
-      </div>
-      <div class="role-card">
-        <div class="role-icon">👩‍💻</div>
-        <h3>My Role</h3>
-        <p>As the founder and developer, I designed, researched, and engineered this platform to bridge the gap between bioethical theory and interactive digital tools.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Educational Disclaimer Card -->
-<div class="feature-card" id="disclaimer">
-<h3><i class="fa-solid fa-scale-unbalanced-flip"></i> Educational Disclaimer</h3>
-<p class="feature-sub">This website is for educational purposes only and does not constitute medical or legal advice.</p>
-<ul class="disclaimer-list">
-<li><i class="fa-solid fa-ban text-red"></i> Not a substitute for professional advice</li>
-<li><i class="fa-solid fa-globe text-blue"></i> Laws and practices vary by country</li>
-<li><i class="fa-solid fa-robot text-purple"></i> AI-generated content may be incomplete</li>
-</ul>
-<a href="#" class="disclaimer-link">Read full disclaimer <i class="fa-solid fa-arrow-right"></i></a>
-</div>
-
-</div>
-
-<!-- Custom Case Analyzer Section -->
-<section class="section analyzer-section" id="analyzer">
-<h2><i class="fa-solid fa-pen-ruler"></i> Analyze a Custom Case</h2>
-<p class="section-sub">Describe a medical law or ethics conflict to get an objective, multi-perspective analysis.</p>
-
+<section class="section" id="submit-evidence">
+<h2><i class="fa-solid fa-file-circle-check"></i> Submit Evidence</h2>
+<p class="section-sub">Add a product comparison to help crowdsource price transparency evidence.</p>
+<form id="evidence-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
 <div class="analyzer-box">
-<textarea id="case-input" rows="4" placeholder="Describe the case summary and key dilemma..."></textarea>
-<button class="btn btn-primary" id="analyze-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Case</button>
-</div>
-<div id="analyzer-result" class="analyzer-result hidden"></div>
+<label>Product / Category<input type="text" name="product" required maxlength="200" placeholder="e.g. Women's shampoo"></label>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><label>Product A price<input type="number" name="priceA" min="0" step="0.01" required placeholder="0.00"></label><label>Product B price<input type="number" name="priceB" min="0" step="0.01" required placeholder="0.00"></label></div>
+<label>Net quantity / unit<input type="text" name="quantity" required maxlength="100" placeholder="e.g. 250 ml / 1 pack"></label>
+<label>Product A details<textarea name="detailsA" rows="3" required maxlength="2000"></textarea></label>
+<label>Product B details<textarea name="detailsB" rows="3" required maxlength="2000"></textarea></label>
+<fieldset><legend>Strict equivalence checks (select at least 2)</legend><label><input type="checkbox" name="equivalence" value="net_quantity_unit"> Same net quantity / unit</label><label><input type="checkbox" name="equivalence" value="primary_ingredients_materials"> Same primary ingredients / materials</label><label><input type="checkbox" name="equivalence" value="function_performance"> Same function / performance</label><label><input type="checkbox" name="equivalence" value="pack_size"> Same pack size / count</label></fieldset>
+<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px"><input type="hidden" name="_subject" value="Gender Pricing Evidence Submission"><button type="submit" class="btn btn-primary"> <i class="fa-solid fa-paper-plane"></i> Submit Evidence</button><p id="evidence-status" role="status" aria-live="polite"></p>
+</div></form>
+<div><h3>Local evidence log</h3><table><thead><tr><th>Product</th><th>Prices</th><th>Quantity</th><th>Checks</th></tr></thead><tbody id="evidence-table-body"></tbody></table></div>
 </section>
-
-<!-- Crowdsourced Evidence Submission -->
-<section class="section evidence-section" id="submit-evidence">
-  <h2><i class="fa-solid fa-file-circle-check"></i> Submit Evidence</h2>
-  <p class="section-sub">Add a product comparison to help crowdsource price transparency evidence.</p>
-
-  <form id="evidence-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
-    <div class="analyzer-box" style="display:block; padding:18px; border:1px solid var(--border-light, #e2e8f0); border-radius:12px; background:var(--panel, #0f172a);">
-      <label style="display:block; margin-bottom:12px; font-weight:600; color: var(--text-primary, #e2e8f0);">
-        Product / Category
-        <input type="text" name="product" required maxlength="200" placeholder="e.g. Women’s shampoo" style="width:100%; margin-top:8px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light, #e2e8f0); background: rgba(15,23,42,0.7); color: var(--text-primary, #e2e8f0);">
-      </label>
-
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
-        <label style="display:block; font-weight:600; color: var(--text-primary, #e2e8f0);">
-          Product A price
-          <input type="number" name="priceA" min="0" step="0.01" required placeholder="0.00" style="width:100%; margin-top:8px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light, #e2e8f0); background: rgba(15,23,42,0.7); color: var(--text-primary, #e2e8f0);">
-        </label>
-
-        <label style="display:block; font-weight:600; color: var(--text-primary, #e2e8f0);">
-          Product B price
-          <input type="number" name="priceB" min="0" step="0.01" required placeholder="0.00" style="width:100%; margin-top:8px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light, #e2e8f0); background: rgba(15,23,42,0.7); color: var(--text-primary, #e2e8f0);">
-        </label>
-      </div>
-
-      <label style="display:block; margin-top:16px; font-weight:600; color: var(--text-primary, #e2e8f0);">
-        Net quantity / unit
-        <input type="text" name="quantity" required maxlength="100" placeholder="e.g. 250 ml / 12 oz / 1 pack" style="width:100%; margin-top:8px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light, #e2e8f0); background: rgba(15,23,42,0.7); color: var(--text-primary, #e2e8f0);">
-      </label>
-
-      <label style="display:block; margin-top:16px; font-weight:600; color: var(--text-primary, #e2e8f0);">
-        Product A details
-        <textarea name="detailsA" rows="3" required maxlength="2000" placeholder="Describe the product, brand, and context..." style="width:100%; margin-top:8px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light, #e2e8f0); resize:vertical; background: rgba(15,23,42,0.7); color: var(--text-primary, #e2e8f0);"></textarea>
-      </label>
-
-      <label style="display:block; margin-top:16px; font-weight:600; color: var(--text-primary, #e2e8f0);">
-        Product B details
-        <textarea name="detailsB" rows="3" required maxlength="2000" placeholder="Describe the comparison product..." style="width:100%; margin-top:8px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light, #e2e8f0); resize:vertical; background: rgba(15,23,42,0.7); color: var(--text-primary, #e2e8f0);"></textarea>
-      </label>
-
-      <fieldset style="margin-top:18px; border:1px solid var(--border-light, #e2e8f0); border-radius:10px; padding:12px 14px; color: var(--text-primary, #e2e8f0);">
-        <legend style="padding:0 8px; font-weight:700;">Strict equivalence checks (select at least 2)</legend>
-
-        <label style="display:block; margin-top:8px; color: var(--text-primary, #e2e8f0);">
-          <input type="checkbox" name="equivalence" value="net_quantity_unit">
-          Same net quantity / unit
-        </label>
-
-        <label style="display:block; margin-top:8px; color: var(--text-primary, #e2e8f0);">
-          <input type="checkbox" name="equivalence" value="primary_ingredients_materials">
-          Same primary ingredients / materials
-        </label>
-
-        <label style="display:block; margin-top:8px; color: var(--text-primary, #e2e8f0);">
-          <input type="checkbox" name="equivalence" value="function_performance">
-          Same function / performance
-        </label>
-
-        <label style="display:block; margin-top:8px; color: var(--text-primary, #e2e8f0);">
-          <input type="checkbox" name="equivalence" value="pack_size">
-          Same pack size / count
-        </label>
-      </fieldset>
-
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0; pointer-events:none;">
-      <input type="hidden" name="_subject" value="Gender Pricing Evidence Submission">
-
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:18px; flex-wrap:wrap;">
-        <button type="submit" class="btn btn-primary" style="width:auto;">
-          <i class="fa-solid fa-paper-plane"></i> Submit Evidence
-        </button>
-        <p id="evidence-status" role="status" aria-live="polite" style="margin:0; color:var(--text-muted, #94a3b8);"></p>
-      </div>
-    </div>
-  </form>
-
-  <div style="margin-top:20px;">
-    <h3>Local evidence log</h3>
-    <table style="width:100%; border-collapse:collapse; margin-top:10px; color: var(--text-primary, #e2e8f0);">
-      <thead>
-        <tr>
-          <th style="padding:10px; border:1px solid var(--border-light, #e2e8f0); text-align:left;">Product</th>
-          <th style="padding:10px; border:1px solid var(--border-light, #e2e8f0); text-align:left;">Prices</th>
-          <th style="padding:10px; border:1px solid var(--border-light, #e2e8f0); text-align:left;">Quantity</th>
-          <th style="padding:10px; border:1px solid var(--border-light, #e2e8f0); text-align:left;">Checks</th>
-        </tr>
-      </thead>
-      <tbody id="evidence-table-body"></tbody>
-    </table>
-  </div>
-</section>
-
 </main>
-
-<!-- Footer -->
-<footer class="footer">
-<div class="footer-container">
-<div class="footer-brand">
-<div class="nav-brand">
-<i class="fa-solid fa-scale-balanced brand-icon"></i>
-<span class="brand-title">BioEthix & MedLaw</span>
-</div>
-<p>Exploring the ethical crossroads of medicine, technology, and law.</p>
-<p class="copyright">&copy; 2026 BioEthix & MedLaw. All rights reserved.</p>
-</div>
-<div class="footer-links">
-<h4>Quick Links</h4>
-<ul>
-<li><a href="#home">Home</a></li>
-<li><a href="#cases">Cases</a></li>
-<li><a href="#analyzer">Analyzer</a></li>
-<li><a href="#submit-evidence">Evidence</a></li>
-<li><a href="#vote">Vote</a></li>
-<li><a href="#disclaimer">Disclaimer</a></li>
-</ul>
-</div>
-<div class="footer-social">
-<h4>Connect</h4>
-<p>Get in touch or follow the project:</p>
-<div class="social-icons">
-<a href="#"><i class="fa-solid fa-envelope"></i></a>
-<a href="#"><i class="fa-brands fa-instagram"></i></a>
-<a href="#"><i class="fa-brands fa-github"></i></a>
-<a href="#"><i class="fa-brands fa-linkedin"></i></a>
-</div>
-</div>
-</div>
-</footer>
-
+<footer class="footer"><div class="footer-container"><div class="footer-brand"><div class="nav-brand"><i class="fa-solid fa-scale-balanced brand-icon"></i><span class="brand-title">BioEthix & MedLaw</span></div><p>Exploring the ethical crossroads of medicine, technology, and law.</p><p class="copyright">&copy; 2026 BioEthix & MedLaw. All rights reserved.</p></div><div class="footer-links"><h4>Quick Links</h4><ul><li><a href="#home">Home</a></li><li><a href="#cases">Cases</a></li><li><a href="#analyzer">Analyzer</a></li><li><a href="#submit-evidence">Evidence</a></li><li><a href="#vote">Vote</a></li><li><a href="#disclaimer">Disclaimer</a></li></ul></div><div class="footer-social"><h4>Connect</h4><p>Get in touch or follow the project:</p><div class="social-icons"><a href="#"><i class="fa-solid fa-envelope"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-github"></i></a><a href="#"><i class="fa-brands fa-linkedin"></i></a></div></div></div></footer>
 <script src="app.js"></script>
 </body>
 </html>
