@@ -1,48 +1,32 @@
-// --- Gender Pricing Transparency Engine: evidence submission ---
-
+// --- Crowdsourced evidence submission ---
 (() => {
   const STORAGE_KEY = 'genderPricingEvidence';
-  const BACKEND_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
   const readEntries = () => {
     try {
       const entries = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       return Array.isArray(entries) ? entries : [];
     } catch (error) {
-      console.error('Unable to read local evidence entries:', error);
+      console.error('Unable to read local evidence:', error);
       return [];
     }
   };
 
   const renderEntries = () => {
-    const body = document.getElementById('evidence-table-body');
-    if (!body) return;
+    const tableBody = document.getElementById('evidence-table-body');
+    if (!tableBody) return;
 
-    body.replaceChildren();
+    tableBody.replaceChildren();
     readEntries().forEach((entry) => {
       const row = document.createElement('tr');
       [entry.product, `${entry.priceA} / ${entry.priceB}`, entry.quantity,
-        entry.equivalence.length].forEach((value) => {
+        String(entry.equivalence.length)].forEach((value) => {
         const cell = document.createElement('td');
         cell.textContent = value;
         row.appendChild(cell);
       });
-      body.appendChild(row);
+      tableBody.appendChild(row);
     });
-  };
-
-  const collectEntry = (form) => {
-    const data = new FormData(form);
-    return {
-      product: String(data.get('product') || '').trim(),
-      priceA: String(data.get('priceA') || '').trim(),
-      priceB: String(data.get('priceB') || '').trim(),
-      quantity: String(data.get('quantity') || '').trim(),
-      detailsA: String(data.get('detailsA') || '').trim(),
-      detailsB: String(data.get('detailsB') || '').trim(),
-      equivalence: data.getAll('equivalence'),
-      submittedAt: new Date().toISOString()
-    };
   };
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -57,14 +41,22 @@
       event.preventDefault();
       status.textContent = '';
 
-      const entry = collectEntry(form);
-      const requiredFields = [entry.product, entry.priceA, entry.priceB,
-        entry.quantity, entry.detailsA, entry.detailsB];
+      const data = new FormData(form);
+      const entry = {
+        product: String(data.get('product') || '').trim(),
+        priceA: String(data.get('priceA') || '').trim(),
+        priceB: String(data.get('priceB') || '').trim(),
+        quantity: String(data.get('quantity') || '').trim(),
+        detailsA: String(data.get('detailsA') || '').trim(),
+        detailsB: String(data.get('detailsB') || '').trim(),
+        equivalence: data.getAll('equivalence'),
+        submittedAt: new Date().toISOString()
+      };
 
-      if (form.elements._gotcha?.value) return;
-      if (requiredFields.some((value) => !value) || !form.checkValidity()) {
-        status.textContent = 'Please complete all required fields.';
+      if (data.get('_gotcha')) return;
+      if (!form.checkValidity()) {
         form.reportValidity();
+        status.textContent = 'Please complete all required fields.';
         return;
       }
       if (entry.equivalence.length < 2) {
@@ -78,12 +70,12 @@
       renderEntries();
 
       submitButton.disabled = true;
-      submitButton.textContent = 'Submitting…';
+      submitButton.textContent = 'Submitting...';
 
       try {
-        const response = await fetch(BACKEND_ENDPOINT, {
+        const response = await fetch(form.action, {
           method: 'POST',
-          body: new FormData(form),
+          body: data,
           headers: { Accept: 'application/json' }
         });
         if (!response.ok) throw new Error(`Backend returned ${response.status}`);
@@ -91,7 +83,7 @@
         status.textContent = 'Evidence saved locally and submitted successfully.';
         form.reset();
       } catch (error) {
-        console.error('Cloud evidence submission failed:', error);
+        console.error('Cloud submission failed:', error);
         status.textContent = 'Saved locally, but cloud submission failed. Please try again later.';
       } finally {
         submitButton.disabled = false;
