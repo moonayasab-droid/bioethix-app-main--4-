@@ -9,204 +9,47 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link rel="stylesheet" href="https://...">
 <meta name="google-site-verification" content="Sf1WCMyshZf23y-5UUvp2_laBnOFvDgp8OPVeWVxydo" />
 </head>
 <body class="dark-theme">
 <header class="navbar">
-  <div class="nav-brand">
-    <i class="fa-solid fa-scale-balanced brand-icon"></i>
-    <div class="brand-text">
-      <span class="brand-title">BioEthics & MedLaw</span>
-      <span class="brand-subtitle">Exploring Ethics. Advancing Justice.</span>
-    </div>
-  </div>
-
-  <nav class="nav-links" aria-label="Primary navigation">
-    <a href="#home" class="active">Home</a>
-    <a href="#cases">Cases</a>
-    <a href="#analyzer">Analyzer</a>
-    <a href="#cases">Evidence</a>
-    <a href="#vote">Vote</a>
-    <a href="#about">About</a>
-    <a href="#disclaimer">Disclaimer</a>
-  </nav>
-
-  <div class="nav-actions">
-    <button class="btn btn-secondary" id="theme-toggle" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
-  </div>
+<div class="nav-brand"><i class="fa-solid fa-scale-balanced brand-icon"></i><div class="brand-text"><span class="brand-title">BioEthix & MedLaw</span><span class="brand-subtitle">Exploring Ethics. Advancing Justice.</span></div></div>
+<nav class="nav-links"><a href="#home" class="active">Home</a><a href="#cases">Cases</a><a href="#analyzer">Analyzer</a><a href="#submit-evidence">Evidence</a><a href="#vote">Vote</a><a href="#about">About</a><a href="#disclaimer">Disclaimer</a></nav>
+<div class="nav-actions"><button class="btn-secondary" id="theme-toggle"><i class="fa-solid fa-moon"></i></button></div>
 </header>
-
 <main class="container">
-  <section class="hero-section" id="home">
-    <div class="hero-content">
-      <h1 class="hero-title">BioEthics & MedLaw</h1>
-      <p class="hero-subtitle">Explore ethical and legal questions in medicine, healthcare technology, patient rights, and real-world clinical decision-making through a research-driven educational platform.</p>
-      <div class="hero-buttons">
-        <a href="#cases" class="btn btn-primary">Explore Cases</a>
-        <a href="#analyzer" class="btn btn-outline">Analyze a Case</a>
-      </div>
-    </div>
+<section class="hero-section" id="home"><div class="hero-content"><h1 class="hero-title">Explore, Question.<br><span class="accent-text">Think Ethically.</span></h1><p class="hero-subtitle">Real-world healthcare dilemmas. Multi-perspective analysis. Evidence-based frameworks.</p></div></section>
 
-    <div class="hero-graphic" aria-hidden="true">
-      <div class="graphic-card">
-        <div class="dna-icon"><i class="fa-solid fa-dna"></i></div>
-        <div class="scale-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-      </div>
-    </div>
-  </section>
+<section class="section" id="cases"><div class="section-header"><h2><i class="fa-solid fa-book-bookmark"></i> Explore Real-World Cases</h2><div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input id="search-input" type="text" placeholder="Search cases..."/></div></div><div class="cards-grid"><div class="case-card"><span class="card-badge robotics-badge"><i class="fa-solid fa-robot"></i> AI & Healthcare</span><h3>Autonomous Surgical Robotics</h3><p>When a robotic system contributes to a critical treatment decision, who is accountable?</p><a href="#analyzer" class="card-link">Explore Case <i class="fa-solid fa-arrow-right"></i></a></div><div class="case-card"><span class="card-badge pediatrics-badge"><i class="fa-solid fa-child"></i> Pediatrics</span><h3>Pediatric Treatment Refusal</h3><p>Balancing parental authority, medical risk, and a child's best interests.</p><a href="#analyzer" class="card-link">Explore Case <i class="fa-solid fa-arrow-right"></i></a></div><div class="case-card"><span class="card-badge privacy-badge"><i class="fa-solid fa-shield-halved"></i> Privacy</span><h3>AI Medical Diagnosis</h3><p>Questions of accuracy, bias, consent, and responsibility with AI.</p><a href="#analyzer" class="card-link">Explore Case <i class="fa-solid fa-arrow-right"></i></a></div></div></section>
 
-  <section class="section" id="cases">
-    <div class="section-header">
-      <h2><i class="fa-solid fa-book-bookmark"></i> Featured Cases</h2>
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input id="search-input" type="text" placeholder="Search cases..." />
-      </div>
-    </div>
+<section class="section analyzer-section" id="analyzer"><h2><i class="fa-solid fa-pen-ruler"></i> Analyze a Custom Case</h2><p class="section-sub">Describe a medical law or ethics conflict to get an objective, multi-perspective analysis.</p><div class="analyzer-box"><textarea id="case-input" rows="4" placeholder="Describe the case summary and key dilemma..."></textarea><button class="btn btn-primary" id="analyze-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Case</button></div><div id="analyzer-result" class="analyzer-result hidden"></div></section>
 
-    <div class="filter-bar">
-      <button class="filter-btn active">All</button>
-      <button class="filter-btn">Medical Ethics</button>
-      <button class="filter-btn">Medical Law</button>
-      <button class="filter-btn">AI & Healthcare</button>
-      <button class="filter-btn">Patient Rights</button>
-    </div>
+<section class="section" id="submit-evidence">
+<h2><i class="fa-solid fa-file-circle-check"></i> Submit Evidence</h2>
+<p class="section-sub">Add a product comparison to help crowdsource price transparency evidence.</p>
+<form id="evidence-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+<div class="analyzer-box">
+<label>Product / Category<input type="text" name="product" required maxlength="200" placeholder="e.g. Women's shampoo"></label>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><label>Product A price<input type="number" name="priceA" min="0" step="0.01" required placeholder="0.00"></label><label>Product B price<input type="number" name="priceB" min="0" step="0.01" required placeholder="0.00"></label></div>
+<label>Net quantity / unit<input type="text" name="quantity" required maxlength="100" placeholder="e.g. 250 ml / 1 pack"></label>
+<label>Product A details<textarea name="detailsA" rows="3" required maxlength="2000"></textarea></label>
+<label>Product B details<textarea name="detailsB" rows="3" required maxlength="2000"></textarea></label>
+<fieldset><legend>Strict equivalence checks (select at least 2)</legend><label><input type="checkbox" name="equivalence" value="net_quantity_unit"> Same net quantity / unit</label><label><input type="checkbox" name="equivalence" value="primary_ingredients_materials"> Same primary ingredients / materials</label><label><input type="checkbox" name="equivalence" value="function_performance"> Same function / performance</label><label><input type="checkbox" name="equivalence" value="pack_size"> Same pack size / count</label></fieldset>
+<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px"><input type="hidden" name="_subject" value="Gender Pricing Evidence Submission"><button type="submit" class="btn btn-primary"> <i class="fa-solid fa-paper-plane"></i> Submit Evidence</button><p id="evidence-status" role="status" aria-live="polite"></p>
+</div></form>
+<div><h3>Local evidence log</h3><table><thead><tr><th>Product</th><th>Prices</th><th>Quantity</th><th>Checks</th></tr></thead><tbody id="evidence-table-body"></tbody></table></div>
+</section>
 
-    <div id="cases-list" class="cards-grid">
-      <article class="case-card">
-        <div>
-          <span class="card-badge robotics-badge"><i class="fa-solid fa-robot"></i> AI & Healthcare</span>
-          <h3>Autonomous Surgical Robotics</h3>
-          <p>When a robotic system contributes to a critical treatment decision, who is accountable for the outcome?</p>
-        </div>
-        <a href="#analyzer" class="card-link">Explore Case <i class="fa-solid fa-arrow-right"></i></a>
-      </article>
+<div class="features-grid"><div class="feature-card" id="vote"><h3><i class="fa-solid fa-chart-column"></i> Community Vote</h3><p class="feature-sub">Share your perspective on this month's ethical dilemma.</p><div class="vote-box"><div class="vote-bar"><div id="vote-fill" class="vote-fill"></div></div><div class="vote-stats"><div class="vote-option"><button class="btn-vote" id="btn-agree">👍 Agree</button><span id="pct-agree">48%</span></div><div class="vote-option"><button class="btn-vote" id="btn-disagree">👎 Disagree</button><span id="pct-disagree">52%</span></div></div><p id="total-count" class="vote-total">Based on 250 votes</p></div></div>
 
-      <article class="case-card">
-        <div>
-          <span class="card-badge pediatrics-badge"><i class="fa-solid fa-child"></i> Pediatrics</span>
-          <h3>Pediatric Treatment Refusal</h3>
-          <p>Balancing parental authority, medical risk, and a child’s best interests in a high-stakes refusal of care.</p>
-        </div>
-        <a href="#analyzer" class="card-link">Explore Case <i class="fa-solid fa-arrow-right"></i></a>
-      </article>
+<div class="feature-card" id="about"><div class="section-header"><h2>👤 About the Platform & Creator</h2></div><div class="role-grid"><div class="role-card"><div class="role-icon">💡</div><h3>Mission</h3><p>BioEthix advances healthcare ethics education through open-source, peer-reviewed case analysis and jurisdictional frameworks.</p></div><div class="role-card"><div class="role-icon">🤝</div><h3>Collaboration</h3><p>Built by bioethicists, legal scholars, and medical professionals to support research and informed debate.</p></div><div class="role-card"><div class="role-icon">📚</div><h3>Resources</h3><p>Integrates ethical frameworks, legal precedents, and scholarly sources to guide complex healthcare decisions.</p></div></div></div>
 
-      <article class="case-card">
-        <div>
-          <span class="card-badge privacy-badge"><i class="fa-solid fa-shield-halved"></i> Privacy</span>
-          <h3>AI Medical Diagnosis</h3>
-          <p>Questions of accuracy, bias, consent, and responsibility arise when AI influences clinical diagnoses.</p>
-        </div>
-        <a href="#analyzer" class="card-link">Explore Case <i class="fa-solid fa-arrow-right"></i></a>
-      </article>
-    </div>
-  </section>
+<div class="feature-card" id="disclaimer"><h3><i class="fa-solid fa-scale-unbalanced-flip"></i> Educational Disclaimer</h3><p class="feature-sub">This website is for educational and informational purposes only. It does not constitute formal legal or medical advice.</p></div>
 
-  <section class="section analyzer-section" id="analyzer">
-    <h2><i class="fa-solid fa-pen-ruler"></i> Analyze a Custom Case</h2>
-    <p class="section-sub">Describe a medical law or ethics conflict to get an objective, multi-perspective analysis.</p>
-
-    <div class="analyzer-box">
-      <textarea id="case-input" rows="4" placeholder="Describe the case summary and key dilemma..."></textarea>
-      <button class="btn btn-primary" id="analyze-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Case</button>
-    </div>
-
-    <div id="analyzer-result" class="analyzer-result hidden"></div>
-  </section>
-
-  <div class="features-grid">
-    <div class="feature-card" id="vote">
-      <h3><i class="fa-solid fa-chart-column"></i> Community Vote</h3>
-      <p class="feature-sub">Share your perspective on this month's ethical dilemma.</p>
-
-      <div class="vote-box">
-        <div class="progress-labels">
-          <span>Agree</span>
-          <span>Disagree</span>
-        </div>
-        <div class="progress-bar-bg"><div id="vote-fill" class="progress-bar-fill" style="width:48%"></div></div>
-
-        <div class="vote-actions">
-          <button class="btn btn-vote-yes" id="btn-agree">👍 Agree</button>
-          <button class="btn btn-vote-no" id="btn-disagree">👎 Disagree</button>
-        </div>
-
-        <div class="vote-count">
-          <span id="pct-agree">48%</span>
-          <span> / </span>
-          <span id="pct-disagree">52%</span>
-          <span id="total-count">Based on 250 votes</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="feature-card" id="about">
-      <h3>👤 About the Platform</h3>
-      <p class="feature-sub">This project was built to make bioethics and medical law easier to explore through real-world, interactive case analysis.</p>
-
-      <div class="role-grid">
-        <div class="role-card">
-          <div class="role-icon">💡</div>
-          <h3>Mission</h3>
-          <p>To help students and the public understand the ethical and legal trade-offs in healthcare decisions.</p>
-        </div>
-        <div class="role-card">
-          <div class="role-icon">🤝</div>
-          <h3>Approach</h3>
-          <p>Academic, balanced, and discussion-focused rather than directive or commercial.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="feature-card" id="disclaimer">
-      <h3><i class="fa-solid fa-scale-unbalanced-flip"></i> Educational Disclaimer</h3>
-      <p class="feature-sub">This website is for educational and informational purposes only. It does not constitute formal legal or medical advice.</p>
-      <ul class="disclaimer-list">
-        <li><span class="text-accent">•</span> Educational use only</li>
-        <li><span class="text-red">•</span> Not formal legal advice</li>
-        <li><span class="text-blue">•</span> Not medical treatment guidance</li>
-      </ul>
-    </div>
-
-    <div class="feature-card">
-      <h3><i class="fa-solid fa-comments"></i> Feedback</h3>
-      <p class="feature-sub">Help us improve the platform by sharing your thoughts.</p>
-      <button class="btn btn-primary"><i class="fa-solid fa-comment"></i> Share Feedback</button>
-    </div>
-  </div>
+<div class="feature-card"><h3><i class="fa-solid fa-comments"></i> Feedback</h3><p class="feature-sub">Help us improve the platform by sharing your thoughts.</p><button class="btn btn-primary"><i class="fa-solid fa-comment"></i> Share Feedback</button></div></div>
 </main>
-
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-brand">
-      <div class="nav-brand"><i class="fa-solid fa-scale-balanced brand-icon"></i><span class="brand-title">BioEthics & MedLaw</span></div>
-      <p>Interactive debate and policy research tool for healthcare ethics and medical law.</p>
-    </div>
-
-    <div class="footer-links">
-      <div class="footer-column">
-        <h4>Project</h4>
-        <ul>
-          <li><a href="https://github.com/moonayasab-droid/bioethix-app-main--4-" target="_blank" rel="noreferrer">GitHub Repository</a></li>
-          <li><a href="README.md" target="_blank">Documentation</a></li>
-          <li><a href="https://github.com/moonayasab-droid/bioethix-app-main--4-/issues" target="_blank" rel="noreferrer">Report Issues</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h4>Resources</h4>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#disclaimer">Disclaimer</a></li>
-          <li><a href="extensions/amicus-brief/README.md" target="_blank">Amicus Brief Docs</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <p class="footer-bottom copyright">&copy; 2024 BioEthics & MedLaw. Open-source and freely available for educational use.</p>
-</footer>
-
+<footer class="footer"><div class="footer-container"><div class="footer-brand"><div class="nav-brand"><i class="fa-solid fa-scale-balanced brand-icon"></i><span class="brand-title">BioEthix & MedLaw</span></div><p>Interactive debate and policy research tool for healthcare ethics and medical law.</p></div><div class="footer-links"><div class="footer-column"><h4>Project</h4><ul><li><a href="https://github.com/moonayasab-droid/bioethix-app-main--4-" target="_blank">GitHub Repository</a></li><li><a href="README.md" target="_blank">Documentation</a></li><li><a href="https://github.com/moonayasab-droid/bioethix-app-main--4-/issues" target="_blank">Report Issues</a></li></ul></div><div class="footer-column"><h4>Resources</h4><ul><li><a href="#about">About</a></li><li><a href="#disclaimer">Disclaimer</a></li><li><a href="extensions/amicus-brief/README.md" target="_blank">Amicus Brief Docs</a></li></ul></div></div></div><p class="footer-bottom">&copy; 2024 BioEthix & MedLaw. Open-source and freely available for educational use.</p></footer>
 <script src="app.js"></script>
 </body>
 </html>

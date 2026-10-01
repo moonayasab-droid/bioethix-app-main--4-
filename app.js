@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // --- Analyzer ---
   const analyzeBtn = document.getElementById("analyze-btn");
   const inputField = document.getElementById("case-input");
   const resultContainer = document.getElementById("analyzer-result");
@@ -49,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // --- Community Vote ---
   const btnAgree = document.getElementById("btn-agree");
   const btnDisagree = document.getElementById("btn-disagree");
   const pctAgree = document.getElementById("pct-agree");
@@ -80,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnDisagree) btnDisagree.addEventListener("click", () => vote(false));
   }
 
+  // --- Feedback ---
   const feedbackBtn = Array.from(document.querySelectorAll(".btn-primary")).find((button) => /feedback/i.test(button.textContent || ""));
   if (feedbackBtn) {
     feedbackBtn.addEventListener("click", () => {
@@ -98,6 +101,92 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => wrapper.remove(), 1200);
       });
       wrapper.querySelector("#feedback-cancel").addEventListener("click", () => wrapper.remove());
+    });
+  }
+
+  // --- Crowdsourced evidence submission ---
+  const evidenceForm = document.getElementById("evidence-form");
+  if (evidenceForm) {
+    const STORAGE_KEY = "genderPricingEvidence";
+    const status = document.getElementById("evidence-status");
+    const tableBody = document.getElementById("evidence-table-body");
+    const submitButton = evidenceForm.querySelector('button[type="submit"]');
+
+    const readEntries = () => {
+      try {
+        const entries = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        return Array.isArray(entries) ? entries : [];
+      } catch (error) {
+        console.error("Unable to read local evidence entries:", error);
+        return [];
+      }
+    };
+
+    const renderEntries = () => {
+      if (!tableBody) return;
+      tableBody.replaceChildren();
+      readEntries().forEach((entry) => {
+        const row = document.createElement("tr");
+        [entry.product, `${entry.priceA} / ${entry.priceB}`, entry.quantity, String((entry.equivalence || []).length)].forEach((value) => {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+        tableBody.appendChild(row);
+      });
+    };
+
+    renderEntries();
+    evidenceForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (status) status.textContent = "";
+
+      const formData = new FormData(evidenceForm);
+      if (formData.get("_gotcha")) return;
+      const entry = {
+        product: String(formData.get("product") || "").trim(),
+        priceA: String(formData.get("priceA") || "").trim(),
+        priceB: String(formData.get("priceB") || "").trim(),
+        quantity: String(formData.get("quantity") || "").trim(),
+        detailsA: String(formData.get("detailsA") || "").trim(),
+        detailsB: String(formData.get("detailsB") || "").trim(),
+        equivalence: formData.getAll("equivalence"),
+        submittedAt: new Date().toISOString()
+      };
+
+      if (!evidenceForm.checkValidity()) {
+        evidenceForm.reportValidity();
+        if (status) status.textContent = "Please complete all required fields.";
+        return;
+      }
+      if (entry.equivalence.length < 2) {
+        if (status) status.textContent = "Select at least two objective equivalence checks.";
+        return;
+      }
+
+      const entries = readEntries();
+      entries.push(entry);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+      renderEntries();
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
+      try {
+        const response = await fetch(evidenceForm.action, {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" }
+        });
+        if (!response.ok) throw new Error(`Backend returned ${response.status}`);
+        if (status) status.textContent = "Evidence saved locally and submitted successfully.";
+        evidenceForm.reset();
+      } catch (error) {
+        console.error("Cloud evidence submission failed:", error);
+        if (status) status.textContent = "Saved locally, but cloud submission failed. Please try again later.";
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Submit Evidence";
+      }
     });
   }
 });
