@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- Analyzer ---
   const analyzeBtn = document.getElementById("analyze-btn");
   const inputField = document.getElementById("case-input");
   const resultContainer = document.getElementById("analyzer-result");
@@ -50,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- Community Vote ---
   const btnAgree = document.getElementById("btn-agree");
   const btnDisagree = document.getElementById("btn-disagree");
   const pctAgree = document.getElementById("pct-agree");
@@ -82,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnDisagree) btnDisagree.addEventListener("click", () => vote(false));
   }
 
-  // --- Feedback ---
   const feedbackBtn = Array.from(document.querySelectorAll(".btn-primary")).find((button) => /feedback/i.test(button.textContent || ""));
   if (feedbackBtn) {
     feedbackBtn.addEventListener("click", () => {

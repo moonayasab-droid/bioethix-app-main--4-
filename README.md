@@ -1,57 +1,101 @@
-# bioethix-app
+# BioEthix & MedLaw - Exploring Ethics. Advancing Justice.
 
-interactive debate and policy research tool for healthcare
+BioEthix & MedLaw is an interactive debate and policy research tool for healthcare ethics and medical law. It helps users analyze complex healthcare dilemmas through ethical frameworks, jurisdiction-aware legal reasoning, case discussion, and community participation.
 
-## 🚀 Live Demo
+## Project Overview
 
-**[Open BioEthix Now →](https://moonayasab-droid.github.io/bioethix-app-main--4-/)**
+This project explores how legal principles, bioethical values, and policy reasoning intersect in healthcare decision-making. The platform is designed for education, research, and thoughtful public discussion rather than direct legal or medical decision-making.
 
----
+## Project Architecture
 
-## How It Works
+```text
+bioethix-app-main--4-/
+├── index.html                        # Main app layout and navigation
+├── app.js                            # Application logic for analyzer, vote, feedback
+├── style.css                         # Site theme, layout, and component styling
+├── README.md                         # Project documentation
+├── LICENSE                           # Project license
+├── extensions/
+│   └── amicus-brief/
+│       ├── briefGenerator.js         # Generates dual-perspective legal/ethical outputs
+│       ├── jurisdictionRules.json    # Legal and ethical rule sets by jurisdiction
+│       ├── submissionForm.html        # Optional static issue form
+│       └── README.md                 # Extension-specific documentation
+├── data/
+│   └── cases/                        # Planned project case library
+├── assets/                           # Static files, icons, and media
+├── tests/                            # Unit and integration test suite (planned)
+├── evidence.js                       # Removed: legacy evidence-local-storage logic
+├── sumbit.html                       # Removed: legacy evidence submission page
+└── .github/                          # Repository automation and issue templates
+```
 
-BioEthix structures healthcare ethics analysis through three foundational pillars: **autonomy** (patient decision-making rights), **beneficence** (duty to maximize benefit), and **statutory legal boundaries** (jurisdiction-specific compliance). The analyzer integrates these principles with evidence-based case frameworks and dual-perspective legal briefs to help researchers, policymakers, and students navigate complex bioethical dilemmas with rigor and transparency.
+### Data Flow
 
----
+```text
+User Input
+  │
+  ├─ case text → app.js → analyzer-result
+  │
+  ├─ vote action → app.js → vote UI updates
+  │
+  └─ brief generation → extensions/amicus-brief/ → rendered ethical/legal analysis
+```
 
-## Features
+## Source Citations
 
-- **Ethical Framework Integration**: Autonomy, beneficence, non-maleficence, and justice-based analysis
-- **Dual-Perspective Briefs**: Generate structured legal and ethical viewpoints for the same case
-- **Jurisdiction-Aware Rules**: Support for US, EU, UAE, and extensible rulesets
-- **Open-Source Contribution Workflow**: Peer review and case library management via GitHub Issues
-- **Privacy-First Design**: No server-side data storage; all submissions are opt-in via GitHub
+This project draws on established bioethics and legal sources, including:
 
----
+- Beauchamp, T. L., and Childress, J. F., Principles of Biomedical Ethics.
+- World Medical Association, Declaration of Helsinki.
+- UNESCO, Universal Declaration on Bioethics and Human Rights.
+- U.S. Department of Health & Human Services, Belmont Report and HIPAA guidance.
+- Council of Europe, Bioethics Convention and related legal frameworks.
+- PubMed, Cochrane Library, SSRN, and Google Scholar for evidence-based research.
+- Jurisdiction-specific standards for US, EU, and UAE contexts.
 
+## Legal and Medical Disclaimer
 
----
+This platform is for educational and informational purposes only. It does not constitute formal legal advice, medical advice, diagnosis, treatment guidance, or a professional relationship with a licensed attorney or physician. Users should consult qualified professionals for specific legal or medical questions. This project is not a substitute for professional advice and should not be used for emergency or urgent decisions.
 
-## Getting Started
+## Contribution Guidelines
 
-### For Users
+1. Fork the repository.
+2. Create a feature branch:
+   ```bash
+   git checkout -b feature/your-change
+   ```
+3. Make focused changes using semantic HTML, accessible markup, and clear JavaScript patterns.
+4. Avoid adding unverified legal or medical claims.
+5. Test locally in a modern browser.
+6. Commit with a clear message and open a pull request to the main branch.
 
-Visit the [Live Demo](https://moonayasab-droid.github.io/bioethix-app-main--4-/) to analyze a healthcare ethics case.
+## Issue Tracker & Roadmap
 
-### For Contributors
+- GitHub Issues: https://github.com/moonayasab-droid/bioethix-app-main--4-/issues
+- Planned work: expand case library, improve accessibility, add automated testing, and increase jurisdiction coverage.
 
-1. Fork this repo
-2. Edit `extensions/amicus-brief/jurisdictionRules.json` to add new ethical frameworks or legal precedents
-3. Submit a case via the in-app form (creates a GitHub Issue for peer review)
-4. Or open a PR with new case data in `data/cases/`
+## Testing Strategy
 
----
+Use a browser-based smoke test for navigation, analyzer behavior, vote logic, and responsive layout. When configured, run:
 
-## Topics
+```bash
+npm install
+npm test
+npm run test:e2e
+npm run test:a11y
+```
 
-![AI](https://img.shields.io/badge/-AI-blue) ![Bioethics](https://img.shields.io/badge/-Bioethics-green) ![Healthcare](https://img.shields.io/badge/-Healthcare-red) ![JavaScript](https://img.shields.io/badge/-JavaScript-yellow) ![Law](https://img.shields.io/badge/-Law-purple) ![Open Source](https://img.shields.io/badge/-Open--Source-black)
+## Task Checklist
 
----
+* [x] Remove Submit Evidence section
+* [ ] Add clear project architecture
+* [ ] Add proper source citations
+* [ ] Add disclaimer
+* [ ] Add contribution guidelines
+* [ ] Add issue tracker/roadmap
+* [ ] Add tests where appropriate
 
-## License
+## Additional Notes
 
-See LICENSE file for details.
-
-## Contact & Support
-
-For questions, issues, or contributions, please open a GitHub Issue or check the [Amicus Brief documentation](./extensions/amicus-brief/README.md).
+The earlier "Submit Evidence" feature and its local-storage flow have been intentionally removed to keep the platform focused on ethics and legal analysis rather than product-comparison data collection.
