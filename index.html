@@ -15,7 +15,7 @@
 <body class="dark-theme">
 <header class="navbar">
 <div class="nav-brand"><i class="fa-solid fa-scale-balanced brand-icon"></i><div class="brand-text"><span class="brand-title">BioEthix & MedLaw</span><span class="brand-subtitle">Exploring Ethics. Advancing Justice.</span></div></div>
-<nav class="nav-links"><a href="#home" class="active">Home</a><a href="#cases">Cases</a><a href="#analyzer">Analyzer</a><a href="#submit-evidence">Evidence</a><a href="#vote">Vote</a><a href="#about">About</a><a href="#disclaimer">Disclaimer</a></nav>
+<nav class="nav-links"><a href="#home" class="active">Home</a><a href="#cases">Cases</a><a href="#analyzer">Analyzer</a><a href="#vote">Vote</a><a href="#about">About</a><a href="#disclaimer">Disclaimer</a></nav>
 <div class="nav-actions"><button class="btn-secondary" id="theme-toggle"><i class="fa-solid fa-moon"></i></button></div>
 </header>
 <main class="container">
@@ -24,22 +24,6 @@
 <section class="section" id="cases"><div class="section-header"><h2><i class="fa-solid fa-book-bookmark"></i> Explore Real-World Cases</h2><div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input id="search-input" type="text" placeholder="Search cases..."/></div></div><div class="cards-grid"><div class="case-card"><span class="card-badge robotics-badge"><i class="fa-solid fa-robot"></i> AI & Healthcare</span><h3>Autonomous Surgical Robotics</h3><p>When a robotic system contributes to a critical treatment decision, who is accountable?</p><a href="#analyzer" class="card-link">Explore Case <i class="fa-solid fa-arrow-right"></i></a></div><div class="case-card"><span class="card-badge pediatrics-badge"><i class="fa-solid fa-child"></i> Pediatrics</span><h3>Pediatric Treatment Refusal</h3><p>Balancing parental authority, medical risk, and a child's best interests.</p><a href="#analyzer" class="card-link">Explore Case <i class="fa-solid fa-arrow-right"></i></a></div><div class="case-card"><span class="card-badge privacy-badge"><i class="fa-solid fa-shield-halved"></i> Privacy</span><h3>AI Medical Diagnosis</h3><p>Questions of accuracy, bias, consent, and responsibility with AI.</p><a href="#analyzer" class="card-link">Explore Case <i class="fa-solid fa-arrow-right"></i></a></div></div></section>
 
 <section class="section analyzer-section" id="analyzer"><h2><i class="fa-solid fa-pen-ruler"></i> Analyze a Custom Case</h2><p class="section-sub">Describe a medical law or ethics conflict to get an objective, multi-perspective analysis.</p><div class="analyzer-box"><textarea id="case-input" rows="4" placeholder="Describe the case summary and key dilemma..."></textarea><button class="btn btn-primary" id="analyze-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Case</button></div><div id="analyzer-result" class="analyzer-result hidden"></div></section>
-
-<section class="section" id="submit-evidence">
-<h2><i class="fa-solid fa-file-circle-check"></i> Submit Evidence</h2>
-<p class="section-sub">Add a product comparison to help crowdsource price transparency evidence.</p>
-<form id="evidence-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
-<div class="analyzer-box">
-<label>Product / Category<input type="text" name="product" required maxlength="200" placeholder="e.g. Women's shampoo"></label>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><label>Product A price<input type="number" name="priceA" min="0" step="0.01" required placeholder="0.00"></label><label>Product B price<input type="number" name="priceB" min="0" step="0.01" required placeholder="0.00"></label></div>
-<label>Net quantity / unit<input type="text" name="quantity" required maxlength="100" placeholder="e.g. 250 ml / 1 pack"></label>
-<label>Product A details<textarea name="detailsA" rows="3" required maxlength="2000"></textarea></label>
-<label>Product B details<textarea name="detailsB" rows="3" required maxlength="2000"></textarea></label>
-<fieldset><legend>Strict equivalence checks (select at least 2)</legend><label><input type="checkbox" name="equivalence" value="net_quantity_unit"> Same net quantity / unit</label><label><input type="checkbox" name="equivalence" value="primary_ingredients_materials"> Same primary ingredients / materials</label><label><input type="checkbox" name="equivalence" value="function_performance"> Same function / performance</label><label><input type="checkbox" name="equivalence" value="pack_size"> Same pack size / count</label></fieldset>
-<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px"><input type="hidden" name="_subject" value="Gender Pricing Evidence Submission"><button type="submit" class="btn btn-primary"> <i class="fa-solid fa-paper-plane"></i> Submit Evidence</button><p id="evidence-status" role="status" aria-live="polite"></p>
-</div></form>
-<div><h3>Local evidence log</h3><table><thead><tr><th>Product</th><th>Prices</th><th>Quantity</th><th>Checks</th></tr></thead><tbody id="evidence-table-body"></tbody></table></div>
-</section>
 
 <div class="features-grid"><div class="feature-card" id="vote"><h3><i class="fa-solid fa-chart-column"></i> Community Vote</h3><p class="feature-sub">Share your perspective on this month's ethical dilemma.</p><div class="vote-box"><div class="vote-bar"><div id="vote-fill" class="vote-fill"></div></div><div class="vote-stats"><div class="vote-option"><button class="btn-vote" id="btn-agree">👍 Agree</button><span id="pct-agree">48%</span></div><div class="vote-option"><button class="btn-vote" id="btn-disagree">👎 Disagree</button><span id="pct-disagree">52%</span></div></div><p id="total-count" class="vote-total">Based on 250 votes</p></div></div>
 
