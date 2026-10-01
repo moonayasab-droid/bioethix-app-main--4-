@@ -1,0 +1,80 @@
+{
+  "US": {
+    "jurisdiction": "United States",
+    "legalFramework": "Common law + federal statute",
+    "applicableLaws": [
+      "14th Amendment (Due Process)",
+      "42 U.S.C. § 1983",
+      "HIPAA",
+      "ADA",
+      "State medical practice acts"
+    ],
+    "patientRelevantCases": [
+      "Cruzan v. Director, Missouri Department of Health (1990)",
+      "In re Quinlan (1976)"
+    ],
+    "institutionRelevantCases": [
+      "Canterbury v. Spence (1972)"
+    ],
+    "institutionDefenses": [
+      "Professional judgment standard",
+      "Good Samaritan immunity",
+      "Emergency exception to consent"
+    ],
+    "keyQuestions": [
+      "Did the provider obtain informed consent?",
+      "Was the care consistent with the standard of care?",
+      "Were patient rights violated?"
+    ]
+  },
+  "EU": {
+    "jurisdiction": "European Union",
+    "legalFramework": "EU directive + member state law",
+    "applicableLaws": [
+      "Charter of Fundamental Rights",
+      "GDPR",
+      "Oviedo Convention",
+      "Cross-border healthcare directive"
+    ],
+    "patientRelevantCases": [
+      "European Court of Human Rights decisions on privacy and dignity"
+    ],
+    "institutionRelevantCases": [
+      "Clinical governance and professional standards"
+    ],
+    "institutionDefenses": [
+      "Compliance with clinical guidelines",
+      "Professional judgment in context of care standards"
+    ],
+    "keyQuestions": [
+      "Was consent informed and voluntary?",
+      "Are patient data protected under GDPR?",
+      "Does the decision respect fundamental rights?"
+    ]
+  },
+  "UAE": {
+    "jurisdiction": "United Arab Emirates",
+    "legalFramework": "Federal law + Islamic jurisprudence",
+    "applicableLaws": [
+      "UAE Constitution",
+      "Federal healthcare legislation",
+      "Emirate-specific regulations",
+      "Islamic bioethical principles"
+    ],
+    "patientRelevantCases": [
+      "UAE federal court rulings on healthcare and rights"
+    ],
+    "institutionRelevantCases": [
+      "Professional regulation by Ministry of Health"
+    ],
+    "institutionDefenses": [
+      "Compliance with professional standards",
+      "Family-centered decision-making where appropriate"
+    ],
+    "keyQuestions": [
+      "Was consent obtained from the patient or guardian?",
+      "Was the decision consistent with Islamic principles?",
+      "Does the case involve different protections for citizens and expatriates?"
+    ]
+  }
+}
