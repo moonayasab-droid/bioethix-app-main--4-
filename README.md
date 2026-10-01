@@ -1,83 +1,76 @@
 # BioEthix & MedLaw - Exploring Ethics. Advancing Justice.
 
-BioEthix & MedLaw is an interactive debate and policy research tool for healthcare ethics and medical law. It helps users analyze complex healthcare dilemmas through ethical frameworks, jurisdiction-aware legal reasoning, case discussion, and community participation.
-
-## Project Overview
-
-This project explores how legal principles, bioethical values, and policy reasoning intersect in healthcare decision-making. The platform is designed for education, research, and thoughtful public discussion rather than direct legal or medical decision-making.
+BioEthix & MedLaw is an interactive debate and policy research tool for healthcare ethics and medical law. It helps users analyze complex healthcare dilemmas through structured ethical frameworks, legal reasoning, and public discussion.
 
 ## Project Architecture
 
 ```text
 bioethix-app-main--4-/
-├── index.html                        # Main app layout and navigation
-├── app.js                            # Application logic for analyzer, vote, feedback
-├── style.css                         # Site theme, layout, and component styling
-├── README.md                         # Project documentation
-├── LICENSE                           # Project license
+├── index.html                      # Main application shell and navigation
+├── app.js                          # Core client-side logic for analyzer, voting, feedback
+├── style.css                       # Visual design, layout, and responsive behavior
+├── README.md                       # Project overview, roadmap, and developer docs
+├── LICENSE                         # Open-source licensing terms
+├── components/                     # Reusable UI blocks and widgets
+├── pages/                          # Page-level views and sections
+├── utils/                          # Shared helper functions and data utilities
+├── assets/                         # Images, icons, fonts, and static media
+├── tests/                          # Unit and integration tests
 ├── extensions/
 │   └── amicus-brief/
-│       ├── briefGenerator.js         # Generates dual-perspective legal/ethical outputs
-│       ├── jurisdictionRules.json    # Legal and ethical rule sets by jurisdiction
-│       ├── submissionForm.html        # Optional static issue form
-│       └── README.md                 # Extension-specific documentation
+│       ├── briefGenerator.js      # Generates dual-perspective legal/ethical outputs
+│       ├── jurisdictionRules.json  # Jurisdictional and ethical rule data
+│       ├── submissionForm.html     # Optional static issue-generation form
+│       └── README.md               # Extension-specific documentation
 ├── data/
-│   └── cases/                        # Planned project case library
-├── assets/                           # Static files, icons, and media
-├── tests/                            # Unit and integration test suite (planned)
-├── evidence.js                       # Removed: legacy evidence-local-storage logic
-├── sumbit.html                       # Removed: legacy evidence submission page
-└── .github/                          # Repository automation and issue templates
+│   └── cases/                      # Case library and structured examples
+├── .github/                        # CI and repository automation
+└── docs/                           # Supporting project documentation
 ```
 
 ### Data Flow
 
 ```text
-User Input
-  │
-  ├─ case text → app.js → analyzer-result
-  │
-  ├─ vote action → app.js → vote UI updates
-  │
-  └─ brief generation → extensions/amicus-brief/ → rendered ethical/legal analysis
+User interaction
+  ├─ Input / analyzer request → app.js → analysis view
+  ├─ Vote interaction → app.js → vote totals and UI update
+  ├─ Search and case browsing → page data and UI state
+  └─ Brief generation → extensions/amicus-brief/ → rendered legal/ethical summary
 ```
 
 ## Source Citations
 
 This project draws on established bioethics and legal sources, including:
 
-- Beauchamp, T. L., and Childress, J. F., Principles of Biomedical Ethics.
+- Beauchamp, Tom L. and James F. Childress, Principles of Biomedical Ethics.
 - World Medical Association, Declaration of Helsinki.
 - UNESCO, Universal Declaration on Bioethics and Human Rights.
 - U.S. Department of Health & Human Services, Belmont Report and HIPAA guidance.
-- Council of Europe, Bioethics Convention and related legal frameworks.
-- PubMed, Cochrane Library, SSRN, and Google Scholar for evidence-based research.
-- Jurisdiction-specific standards for US, EU, and UAE contexts.
+- Council of Europe, Bioethics Convention and related legal standards.
+- PubMed, Cochrane Library, SSRN, and Google Scholar as research sources.
+- Jurisdiction-specific standards and policy references for US, EU, and UAE contexts.
 
-## Legal and Medical Disclaimer
+## Legal/Medical Disclaimer
 
-This platform is for educational and informational purposes only. It does not constitute formal legal advice, medical advice, diagnosis, treatment guidance, or a professional relationship with a licensed attorney or physician. Users should consult qualified professionals for specific legal or medical questions. This project is not a substitute for professional advice and should not be used for emergency or urgent decisions.
+This platform is for educational and informational purposes only and does not constitute formal legal or medical advice. It is not a substitute for professional judgment by a qualified attorney, physician, or healthcare professional. Users should consult relevant professionals for specific legal or clinical decisions and should not rely on this website for urgent or emergency matters.
 
 ## Contribution Guidelines
 
 1. Fork the repository.
-2. Create a feature branch:
-   ```bash
-   git checkout -b feature/your-change
-   ```
-3. Make focused changes using semantic HTML, accessible markup, and clear JavaScript patterns.
-4. Avoid adding unverified legal or medical claims.
-5. Test locally in a modern browser.
-6. Commit with a clear message and open a pull request to the main branch.
+2. Create a feature branch.
+3. Make focused changes in the relevant files.
+4. Follow existing code style and keep the project accessible and readable.
+5. Validate behavior in a browser and test where appropriate.
+6. Open a pull request with a clear summary and links to any related issues.
 
 ## Issue Tracker & Roadmap
 
 - GitHub Issues: https://github.com/moonayasab-droid/bioethix-app-main--4-/issues
-- Planned work: expand case library, improve accessibility, add automated testing, and increase jurisdiction coverage.
+- Planned work includes expanding the case library, improving accessibility, adding automated testing, and broadening jurisdiction coverage.
 
 ## Testing Strategy
 
-Use a browser-based smoke test for navigation, analyzer behavior, vote logic, and responsive layout. When configured, run:
+Use browser-level smoke testing for navigation, analyzer behavior, vote logic, and responsive layout. Where automated tooling is configured, use:
 
 ```bash
 npm install
@@ -96,6 +89,3 @@ npm run test:a11y
 * [ ] Add issue tracker/roadmap
 * [ ] Add tests where appropriate
 
-## Additional Notes
-
-The earlier "Submit Evidence" feature and its local-storage flow have been intentionally removed to keep the platform focused on ethics and legal analysis rather than product-comparison data collection.
